@@ -1347,6 +1347,36 @@
       opacity: 0.9;
     }
 
+    .share-kakao {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 28px;
+      padding: 14px 22px;
+      border: none;
+      border-radius: 12px;
+      background: #fee500;
+      color: #191919;
+      font-family: 'Noto Serif KR', serif;
+      font-size: var(--text-body);
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      transition: transform var(--dur-fast) var(--ease-soft), filter var(--dur-fast);
+    }
+
+    .share-kakao:active {
+      transform: scale(0.98);
+      filter: brightness(0.96);
+    }
+
+    .share-kakao__icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
     .outro__stripes {
       position: absolute;
       bottom: 0;
@@ -1976,6 +2006,12 @@
     <img class="outro__photo-composite" src="assets/images/outro-photo-composite.png" alt="이제호 &amp; 배유정" />
     <p class="outro__names">이제호 · 배유정</p>
     <p class="outro__date">2026 · 10 · 24</p>
+    <button class="share-kakao" type="button" id="shareKakaoBtn">
+      <svg class="share-kakao__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M12 3C6.477 3 2 6.477 2 10.875c0 2.793 1.857 5.245 4.656 6.645l-.984 3.563a.375.375 0 0 0 .574.414l4.125-2.719c.52.047 1.047.072 1.579.072 5.523 0 10-3.477 10-7.875S17.523 3 12 3z"/>
+      </svg>
+      카카오톡으로 공유하기
+    </button>
     <div class="outro__stripes"></div>
   </footer>
 
@@ -2059,6 +2095,14 @@
 
     const ADDRESS = '서울특별시 관악구 관악로 1';
     const RSVP_CONFIG = window.RSVP_CONFIG || { endpoint: '', secret: '' };
+    const SHARE_CONFIG = Object.assign({
+      siteUrl: 'https://wedding-invitation-sooty-eight.vercel.app/',
+      kakaoJsKey: '',
+      title: '이제호 ♥ 배유정',
+      description: '소중한 분들을 초대합니다.',
+      buttonLabel: '청첩장 보기',
+      imageUrl: 'https://wedding-invitation-sooty-eight.vercel.app/wedding%20photos/og%20image.png'
+    }, window.SHARE_CONFIG || {});
     const RSVP_STORAGE_KEY = 'wedding_rsvp_submitted';
 
     // Top nav — show between hills & amelie, hide at hero top
@@ -2123,6 +2167,58 @@
       clearTimeout(showToast._timer);
       showToast._timer = setTimeout(() => t.classList.remove('show'), 2600);
     }
+
+    (function initKakaoShare() {
+      const btn = document.getElementById('shareKakaoBtn');
+      if (!btn) return;
+
+      const link = SHARE_CONFIG.siteUrl.replace(/\/?$/, '/');
+
+      function loadKakaoSdk() {
+        if (window.Kakao) return Promise.resolve(window.Kakao);
+        return new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js';
+          script.crossOrigin = 'anonymous';
+          script.onload = () => resolve(window.Kakao);
+          script.onerror = () => reject(new Error('Kakao SDK load failed'));
+          document.head.appendChild(script);
+        });
+      }
+
+      btn.addEventListener('click', async () => {
+        if (!SHARE_CONFIG.kakaoJsKey) {
+          showToast('config.js에 kakaoJsKey를 입력해 주세요.');
+          return;
+        }
+        try {
+          const Kakao = await loadKakaoSdk();
+          if (!Kakao.isInitialized()) Kakao.init(SHARE_CONFIG.kakaoJsKey);
+          Kakao.Share.sendDefault({
+            objectType: 'feed',
+            content: {
+              title: SHARE_CONFIG.title,
+              description: SHARE_CONFIG.description,
+              imageUrl: SHARE_CONFIG.imageUrl,
+              link: {
+                mobileWebUrl: link,
+                webUrl: link
+              }
+            },
+            buttons: [{
+              title: SHARE_CONFIG.buttonLabel,
+              link: {
+                mobileWebUrl: link,
+                webUrl: link
+              }
+            }]
+          });
+        } catch (err) {
+          console.error(err);
+          showToast('카카오톡 공유를 열지 못했습니다.');
+        }
+      });
+    })();
 
     // Calendar — October 2026, wedding on 24th (Saturday)
     (function buildCalendar() {
