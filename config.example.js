@@ -8,3 +8,8 @@ window.RSVP_CONFIG = {
   // Apps Script 속성 RSVP_SECRET 과 동일하게 설정 (선택)
   secret: 'your-shared-secret'
 };
+
+window.SHARE_CONFIG = {
+  // 배포된 청첩장 URL (카톡 공유·링크 복사에 사용)
+  siteUrl: 'https://your-vercel-url.vercel.app/'
+};

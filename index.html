@@ -7,7 +7,7 @@
   <meta name="description" content="소중한 분들을 초대합니다." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://wedding-invitation-sooty-eight.vercel.app/" />
-  <meta property="og:site_name" content="이제호 ♥ 배유정" />
+  <meta property="og:site_name" content="Yujeong &amp; Jeho Wedding" />
   <meta property="og:title" content="이제호 ♥ 배유정" />
   <meta property="og:description" content="소중한 분들을 초대합니다." />
   <meta property="og:image" content="https://wedding-invitation-sooty-eight.vercel.app/wedding%20photos/og%20image.png" />
@@ -1347,34 +1347,35 @@
       opacity: 0.9;
     }
 
-    .share-kakao {
+    .share-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       margin-top: 28px;
       padding: 14px 22px;
-      border: none;
-      border-radius: 12px;
-      background: #fee500;
-      color: #191919;
+      border: 1px solid rgba(250, 246, 239, 0.35);
+      border-radius: 999px;
+      background: rgba(250, 246, 239, 0.12);
+      color: #faf6ef;
       font-family: 'Noto Serif KR', serif;
       font-size: var(--text-body);
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-      transition: transform var(--dur-fast) var(--ease-soft), filter var(--dur-fast);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      transition: transform var(--dur-fast) var(--ease-soft), background var(--dur-fast);
     }
 
-    .share-kakao:active {
+    .share-link:active {
       transform: scale(0.98);
-      filter: brightness(0.96);
+      background: rgba(250, 246, 239, 0.2);
     }
 
-    .share-kakao__icon {
-      width: 22px;
-      height: 22px;
+    .share-link img {
+      width: 18px;
+      height: 18px;
       flex-shrink: 0;
+      opacity: 0.9;
     }
 
     .outro__stripes {
@@ -2006,11 +2007,9 @@
     <img class="outro__photo-composite" src="assets/images/outro-photo-composite.png" alt="이제호 &amp; 배유정" />
     <p class="outro__names">이제호 · 배유정</p>
     <p class="outro__date">2026 · 10 · 24</p>
-    <button class="share-kakao" type="button" id="shareKakaoBtn">
-      <svg class="share-kakao__icon" viewBox="0 0 24 24" aria-hidden="true">
-        <path fill="currentColor" d="M12 3C6.477 3 2 6.477 2 10.875c0 2.793 1.857 5.245 4.656 6.645l-.984 3.563a.375.375 0 0 0 .574.414l4.125-2.719c.52.047 1.047.072 1.579.072 5.523 0 10-3.477 10-7.875S17.523 3 12 3z"/>
-      </svg>
-      카카오톡으로 공유하기
+    <button class="share-link" type="button" id="copyInviteLink">
+      <img src="assets/images/duplicate.svg" alt="" />
+      청첩장 링크 복사
     </button>
     <div class="outro__stripes"></div>
   </footer>
@@ -2096,19 +2095,14 @@
     const ADDRESS = '서울특별시 관악구 관악로 1';
     const RSVP_CONFIG = window.RSVP_CONFIG || { endpoint: '', secret: '' };
     const SHARE_CONFIG = Object.assign({
-      siteUrl: '',
-      kakaoJsKey: '',
-      title: '이제호 ♥ 배유정',
-      description: '소중한 분들을 초대합니다.',
-      buttonLabel: '청첩장 보기',
-      imagePath: '/wedding%20photos/og%20image.png'
+      siteUrl: 'https://wedding-invitation-sooty-eight.vercel.app/'
     }, window.SHARE_CONFIG || {});
     const RSVP_STORAGE_KEY = 'wedding_rsvp_submitted';
 
     (function applyShareMeta() {
       const base = SHARE_CONFIG.siteUrl.replace(/\/$/, '');
       if (!base) return;
-      const imageUrl = base + SHARE_CONFIG.imagePath;
+      const imageUrl = base + '/wedding%20photos/og%20image.png';
       const setMeta = (selector, attr, value) => {
         const el = document.querySelector(selector);
         if (el) el.setAttribute(attr, value);
@@ -2187,66 +2181,30 @@
       showToast._timer = setTimeout(() => t.classList.remove('show'), 2600);
     }
 
-    (function initKakaoShare() {
-      const btn = document.getElementById('shareKakaoBtn');
+    (function initCopyInviteLink() {
+      const btn = document.getElementById('copyInviteLink');
       if (!btn) return;
 
-      function getSiteUrl() {
-        if (SHARE_CONFIG.siteUrl) {
-          return SHARE_CONFIG.siteUrl.replace(/\/?$/, '/');
-        }
-        const pathDir = window.location.pathname.replace(/[^/]*$/, '');
-        return window.location.origin + pathDir;
-      }
-
-      function getImageUrl() {
-        const base = (SHARE_CONFIG.siteUrl || window.location.origin).replace(/\/$/, '');
-        return base + SHARE_CONFIG.imagePath;
-      }
-
-      function loadKakaoSdk() {
-        if (window.Kakao) return Promise.resolve(window.Kakao);
-        return new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js';
-          script.crossOrigin = 'anonymous';
-          script.onload = () => resolve(window.Kakao);
-          script.onerror = () => reject(new Error('Kakao SDK load failed'));
-          document.head.appendChild(script);
-        });
-      }
+      const inviteUrl = (SHARE_CONFIG.siteUrl || window.location.href).replace(/\/?$/, '/');
 
       btn.addEventListener('click', async () => {
-        if (!SHARE_CONFIG.kakaoJsKey) {
-          showToast('config.js에 kakaoJsKey를 입력해 주세요.');
-          return;
-        }
         try {
-          const Kakao = await loadKakaoSdk();
-          if (!Kakao.isInitialized()) Kakao.init(SHARE_CONFIG.kakaoJsKey);
-          const link = getSiteUrl();
-          Kakao.Share.sendDefault({
-            objectType: 'feed',
-            content: {
-              title: SHARE_CONFIG.title,
-              description: SHARE_CONFIG.description,
-              imageUrl: getImageUrl(),
-              link: {
-                mobileWebUrl: link,
-                webUrl: link
-              }
-            },
-            buttons: [{
-              title: SHARE_CONFIG.buttonLabel,
-              link: {
-                mobileWebUrl: link,
-                webUrl: link
-              }
-            }]
-          });
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(inviteUrl);
+          } else {
+            const input = document.createElement('textarea');
+            input.value = inviteUrl;
+            input.setAttribute('readonly', '');
+            input.style.position = 'fixed';
+            input.style.opacity = '0';
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+          }
+          showToast('청첩장 링크가 복사되었습니다.');
         } catch (err) {
-          console.error(err);
-          showToast('카카오톡 공유를 열지 못했습니다.');
+          showToast('링크 복사에 실패했습니다.');
         }
       });
     })();
