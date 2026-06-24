@@ -64,7 +64,7 @@
     html {
       font-size: 16px;
       scroll-behavior: smooth;
-      background: var(--burgundy-deep);
+      background: #e2d8d1;
     }
 
     html.luxury-motion .layer:not(.motion-target),
@@ -95,7 +95,7 @@
       font-family: 'Noto Serif KR', serif;
       font-size: var(--text-body);
       line-height: var(--lh-body);
-      background: var(--burgundy-deep);
+      background: #e2d8d1;
       color: var(--brown);
       width: 100%;
       max-width: 100%;
@@ -137,10 +137,9 @@
       max-width: 100%;
       display: flex;
       justify-content: space-around;
-      align-items: center;
+      align-items: stretch;
       gap: 2px;
-      padding: 11px 6px;
-      padding-top: max(11px, env(safe-area-inset-top, 11px));
+      padding: max(11px, env(safe-area-inset-top, 11px)) 6px 0;
       background: #fff;
       border-bottom: 1px solid rgba(79, 40, 27, 0.1);
       transform: translateY(-110%);
@@ -160,15 +159,18 @@
     .top-nav__link {
       flex: 1;
       min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       font-family: 'Noto Serif KR', serif;
-      font-size: var(--text-caption-sm);
+      font-size: var(--text-body);
       font-weight: 500;
       letter-spacing: -0.02em;
       color: var(--brown);
       text-decoration: none;
       white-space: nowrap;
-      padding: 2px 0 6px;
+      padding: 8px 0 0;
       position: relative;
       transition: color var(--dur-fast) var(--ease-soft);
     }
@@ -179,9 +181,9 @@
       left: 50%;
       bottom: 0;
       width: 0;
-      height: 1.5px;
+      height: 2px;
       background: var(--burgundy);
-      border-radius: 1px;
+      border-radius: 0;
       transform: translateX(-50%);
       transition: width var(--dur-med) var(--ease-luxury);
     }
@@ -2392,6 +2394,44 @@
         toggleActions: 'restart restart none none'
       };
 
+      function revealOnLoad({ headings = [], texts = [], images = [], delay = 0 }) {
+        const pick = (sels) => sels.flatMap((sel) => [...document.querySelectorAll(sel)]);
+        const h = pick(headings);
+        const t = pick(texts);
+        const i = pick(images);
+        if (!h.length && !t.length && !i.length) return;
+
+        const tl = gsap.timeline({ delay, defaults: { ease: EASE } });
+
+        if (h.length) {
+          tl.from(h, {
+            y: 32,
+            opacity: 0,
+            duration: 1.25,
+            stagger: 0.1,
+            clearProps: 'transform,opacity'
+          });
+        }
+        if (t.length) {
+          tl.from(t, {
+            y: 18,
+            opacity: 0,
+            duration: 1.05,
+            stagger: 0.07,
+            clearProps: 'transform,opacity'
+          }, h.length ? '-=0.9' : 0);
+        }
+        if (i.length) {
+          tl.from(i, {
+            scale: 1.04,
+            opacity: 0,
+            duration: 1.15,
+            stagger: 0.09,
+            clearProps: 'transform,opacity'
+          }, (h.length || t.length) ? '-=1' : 0);
+        }
+      }
+
       function revealGroup({ trigger, headings = [], texts = [], images = [], cards = [], buttons = [], once = false }) {
         const el = typeof trigger === 'string' ? document.querySelector(trigger) : trigger;
         if (!el) return;
@@ -2436,20 +2476,19 @@
         }
       }
 
-      revealGroup({
-        trigger: '.layer-names',
+      revealOnLoad({
         headings: ['.layer-label'],
         images: ['.layer-script'],
         texts: ['.layer-names__row', '.layer-names__date'],
-        once: true
+        delay: 0.15
+      });
+
+      revealOnLoad({
+        texts: ['.layer-venue-text p'],
+        delay: 0.85
       });
 
       gsap.from('.rsvp-bar', { y: 16, opacity: 0, duration: 1.05, ease: EASE, delay: 1.1 });
-
-      revealGroup({
-        trigger: '.layer-venue-text',
-        texts: ['.layer-venue-text p']
-      });
 
       revealGroup({
         trigger: '.layer-invite-text',
