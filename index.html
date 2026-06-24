@@ -1347,37 +1347,6 @@
       opacity: 0.9;
     }
 
-    .share-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 28px;
-      padding: 14px 22px;
-      border: 1px solid rgba(250, 246, 239, 0.35);
-      border-radius: 999px;
-      background: rgba(250, 246, 239, 0.12);
-      color: #faf6ef;
-      font-family: 'Noto Serif KR', serif;
-      font-size: var(--text-body);
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-      transition: transform var(--dur-fast) var(--ease-soft), background var(--dur-fast);
-    }
-
-    .share-link:active {
-      transform: scale(0.98);
-      background: rgba(250, 246, 239, 0.2);
-    }
-
-    .share-link img {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-      opacity: 0.9;
-    }
-
     .outro__stripes {
       position: absolute;
       bottom: 0;
@@ -2007,10 +1976,6 @@
     <img class="outro__photo-composite" src="assets/images/outro-photo-composite.png" alt="이제호 &amp; 배유정" />
     <p class="outro__names">이제호 · 배유정</p>
     <p class="outro__date">2026 · 10 · 24</p>
-    <button class="share-link" type="button" id="copyInviteLink">
-      <img src="assets/images/duplicate.svg" alt="" />
-      청첩장 링크 복사
-    </button>
     <div class="outro__stripes"></div>
   </footer>
 
@@ -2094,29 +2059,7 @@
 
     const ADDRESS = '서울특별시 관악구 관악로 1';
     const RSVP_CONFIG = window.RSVP_CONFIG || { endpoint: '', secret: '' };
-    const SHARE_CONFIG = Object.assign({
-      siteUrl: 'https://wedding-invitation-sooty-eight.vercel.app/'
-    }, window.SHARE_CONFIG || {});
     const RSVP_STORAGE_KEY = 'wedding_rsvp_submitted';
-
-    (function applyShareMeta() {
-      const base = SHARE_CONFIG.siteUrl.replace(/\/$/, '');
-      if (!base) return;
-      const imageUrl = base + '/wedding%20photos/og%20image.png';
-      const setMeta = (selector, attr, value) => {
-        const el = document.querySelector(selector);
-        if (el) el.setAttribute(attr, value);
-      };
-      setMeta('meta[property="og:image"]', 'content', imageUrl);
-      setMeta('meta[name="twitter:image"]', 'content', imageUrl);
-      let ogUrl = document.querySelector('meta[property="og:url"]');
-      if (!ogUrl) {
-        ogUrl = document.createElement('meta');
-        ogUrl.setAttribute('property', 'og:url');
-        document.head.appendChild(ogUrl);
-      }
-      ogUrl.setAttribute('content', base + '/');
-    })();
 
     // Top nav — show between hills & amelie, hide at hero top
     (function initTopNav() {
@@ -2180,34 +2123,6 @@
       clearTimeout(showToast._timer);
       showToast._timer = setTimeout(() => t.classList.remove('show'), 2600);
     }
-
-    (function initCopyInviteLink() {
-      const btn = document.getElementById('copyInviteLink');
-      if (!btn) return;
-
-      const inviteUrl = (SHARE_CONFIG.siteUrl || window.location.href).replace(/\/?$/, '/');
-
-      btn.addEventListener('click', async () => {
-        try {
-          if (navigator.clipboard && window.isSecureContext) {
-            await navigator.clipboard.writeText(inviteUrl);
-          } else {
-            const input = document.createElement('textarea');
-            input.value = inviteUrl;
-            input.setAttribute('readonly', '');
-            input.style.position = 'fixed';
-            input.style.opacity = '0';
-            document.body.appendChild(input);
-            input.select();
-            document.execCommand('copy');
-            document.body.removeChild(input);
-          }
-          showToast('청첩장 링크가 복사되었습니다.');
-        } catch (err) {
-          showToast('링크 복사에 실패했습니다.');
-        }
-      });
-    })();
 
     // Calendar — October 2026, wedding on 24th (Saturday)
     (function buildCalendar() {
