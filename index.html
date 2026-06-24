@@ -1,0 +1,2647 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>이제호 &amp; 배유정 결혼합니다</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,600&family=Gowun+Batang&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@400;500;600;700;900&family=Pinyon+Script&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brown: #4f281b;
+      --brown-dark: #3d2b1f;
+      --brown-mid: #5c3d2a;
+      --burgundy: #7e2a24;
+      --burgundy-deep: #7c2820;
+      --rose: #c9667d;
+      --rose-light: #ff86ae;
+      --rose-title: #f287a0;
+      --cream: #e2d8d1;
+      --cream-bg: #f5f2eb;
+      --sage: #dadcb9;
+      --pink-grad-start: #fdc3cf;
+      --pink-grad-end: #e9e1dc;
+      --text-muted: #6e5848;
+      --text-soft: #7a6554;
+      --groom-blue: #2980b9;
+      --bride-coral: #b85f41;
+      --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-soft: cubic-bezier(0.33, 0, 0.2, 1);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur-fast: 0.32s;
+      --dur-med: 0.52s;
+      --dur-slow: 0.72s;
+    }
+
+    button,
+    a,
+    .acc-group__head {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      background: var(--burgundy-deep);
+    }
+
+    html.luxury-motion .layer:not(.motion-target),
+    html.luxury-motion .couple-intro__bg,
+    html.luxury-motion .layer-cream,
+    html.luxury-motion .layer-pink-grad,
+    html.luxury-motion .layer-hero,
+    html.luxury-motion .layer-burgundy,
+    html.luxury-motion .layer-burgundy-pattern,
+    html.luxury-motion .layer-grad-bottom,
+    html.luxury-motion .layer-grad-top,
+    html.luxury-motion .layer-lace,
+    html.luxury-motion .layer-clouds,
+    html.luxury-motion .layer-hills,
+    html.luxury-motion .outro__stripes {
+      transform: none !important;
+      filter: none !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html.luxury-motion * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    body {
+      font-family: 'Noto Serif KR', serif;
+      background: var(--burgundy-deep);
+      color: var(--brown);
+      max-width: 375px;
+      margin: 0 auto;
+      overflow-x: hidden;
+      padding-bottom: calc(52px + 24px + 16px);
+    }
+
+    img { display: block; max-width: 100%; }
+
+    .sec-label {
+      font-family: 'Noto Serif KR', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 3.3px;
+      text-transform: uppercase;
+      color: var(--rose);
+      text-align: center;
+    }
+
+    .sec-title {
+      font-size: 21px;
+      font-weight: 500;
+      letter-spacing: 2.52px;
+      color: var(--brown);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      z-index: 9000;
+      width: 100%;
+      max-width: 375px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 2px;
+      padding: 11px 6px;
+      padding-top: max(11px, env(safe-area-inset-top, 11px));
+      background: #fff;
+      border-bottom: 1px solid rgba(79, 40, 27, 0.1);
+      transform: translate(-50%, -110%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform var(--dur-med) var(--ease-out), opacity var(--dur-med) var(--ease-soft);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .top-nav.is-visible {
+      transform: translate(-50%, 0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .top-nav__link {
+      flex: 1;
+      min-width: 0;
+      text-align: center;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--brown);
+      text-decoration: none;
+      white-space: nowrap;
+      padding: 2px 0 6px;
+      position: relative;
+      transition: color var(--dur-fast) var(--ease-soft);
+    }
+
+    .top-nav__link::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--burgundy);
+      border-radius: 1px;
+      transform: translateX(-50%);
+      transition: width var(--dur-med) var(--ease-luxury);
+    }
+
+    .top-nav__link.is-active {
+      color: var(--burgundy);
+      font-weight: 600;
+    }
+
+    .top-nav__link.is-active::after {
+      width: 18px;
+    }
+
+    .top-nav__link:active {
+      color: var(--burgundy);
+    }
+
+    .scroll-anchor {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      pointer-events: none;
+      scroll-margin-top: 52px;
+    }
+
+    .scroll-anchor--start { top: calc(1219 / var(--ah) * 100%); }
+    .scroll-anchor--schedule { top: calc(1769 / var(--ah) * 100%); }
+
+    /* ── FIGMA ARTBOARD (hero → calendar) ── */
+    .artboard {
+      --aw: 375;
+      --ah: 2400;
+      position: relative;
+      width: 100%;
+      max-width: 375px;
+      margin: 0 auto;
+      aspect-ratio: 375 / 2400;
+      overflow: hidden;
+      background: #e2d8d1;
+    }
+
+    .layer {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .layer--interactive { pointer-events: auto; }
+
+    .crop { overflow: hidden; width: 100%; height: 100%; }
+    .crop > img {
+      position: absolute;
+      max-width: none;
+      display: block;
+    }
+
+    .layer-cream {
+      z-index: 1;
+      left: 0;
+      top: calc(820 / var(--ah) * 100%);
+      width: 100%;
+      height: calc(343 / var(--ah) * 100%);
+      background: #e2d8d1;
+    }
+
+    .layer-pink-grad {
+      z-index: 2;
+      left: 0;
+      top: calc(1080 / var(--ah) * 100%);
+      width: 100%;
+      height: calc(641 / var(--ah) * 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(252, 195, 207, 0.55) 0%,
+        #fdc3cf 8%,
+        #f5d5dc 30%,
+        #e9e1dc 55%,
+        #e2d8d1 100%
+      );
+    }
+
+    .layer-hero {
+      z-index: 3;
+      left: calc(-145 / var(--aw) * 100%);
+      top: 0;
+      width: calc(545 / var(--aw) * 100%);
+      height: calc(820 / var(--ah) * 100%);
+    }
+
+    .layer-hero .crop > img {
+      height: 100%;
+      left: 8.96%;
+      top: 0;
+      width: 100.26%;
+    }
+
+    .layer-burgundy {
+      z-index: 13;
+      left: 0;
+      top: calc(1721 / var(--ah) * 100%);
+      width: 100%;
+      height: calc(679 / var(--ah) * 100%);
+      background: #7e2a24;
+    }
+
+    .layer-burgundy-pattern {
+      z-index: 14;
+      left: calc(-258 / var(--aw) * 100%);
+      top: calc(1721 / var(--ah) * 100%);
+      width: calc(1001 / var(--aw) * 100%);
+      height: calc(679 / var(--ah) * 100%);
+      opacity: 0.4;
+    }
+
+    .layer-burgundy-pattern .crop > img {
+      width: 100%;
+      height: 147.34%;
+      top: -0.03%;
+      left: 0;
+    }
+
+    .layer-grad-bottom {
+      z-index: 4;
+      left: 0;
+      top: calc(605 / var(--ah) * 100%);
+      width: 100%;
+      height: calc(217 / var(--ah) * 100%);
+      background: linear-gradient(180deg, rgba(52,36,26,0) 0%, #34241a 100%);
+    }
+
+    .layer-grad-top {
+      z-index: 5;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: calc(306 / var(--ah) * 100%);
+      background: linear-gradient(0deg, rgba(52,36,26,0) 0%, #34241a 100%);
+    }
+
+    .layer-hills {
+      z-index: 9;
+      left: calc(-86 / var(--aw) * 100%);
+      top: calc(868 / var(--ah) * 100%);
+      width: calc(546 / var(--aw) * 100%);
+      height: calc(295 / var(--ah) * 100%);
+    }
+
+    .layer-hills .crop {
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 88%);
+      mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 88%);
+    }
+
+    .layer-hills .crop > img {
+      width: 100%;
+      height: 277.63%;
+      top: -73.05%;
+      left: 0;
+    }
+
+    .layer-hills::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(253, 195, 207, 0.28) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .layer-lace {
+      z-index: 11;
+      left: calc(-101 / var(--aw) * 100%);
+      top: calc(688 / var(--ah) * 100%);
+      width: calc(576 / var(--aw) * 100%);
+      height: calc(354 / var(--ah) * 100%);
+    }
+
+    .layer-lace .crop > img {
+      width: 100%;
+      height: 108.47%;
+      top: 0;
+      left: 0;
+    }
+
+    .layer-clouds {
+      z-index: 10;
+      left: calc(-24 / var(--aw) * 100%);
+      top: calc(948 / var(--ah) * 100%);
+      width: calc(442 / var(--aw) * 100%);
+      height: calc(215 / var(--ah) * 100%);
+    }
+
+    .layer-clouds .crop {
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 50%, transparent 100%);
+      mask-image: linear-gradient(180deg, #000 0%, #000 50%, transparent 100%);
+    }
+
+    .layer-clouds .crop > img {
+      width: 100.11%;
+      height: 137.21%;
+      top: 0;
+      left: -0.06%;
+    }
+
+    .layer-clouds::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(252, 195, 207, 0) 60%, #fcc3cf 100%);
+      pointer-events: none;
+    }
+
+    .layer-amelie-left {
+      z-index: 15;
+      left: calc(-133 / var(--aw) * 100%);
+      top: calc(1042 / var(--ah) * 100%);
+      width: calc(301 / var(--aw) * 100%);
+      height: calc(209 / var(--ah) * 100%);
+    }
+
+    .layer-amelie-left .crop > img {
+      width: 104.32%;
+      height: 100.16%;
+      top: -0.08%;
+      left: 0;
+    }
+
+    .layer-invite-text {
+      z-index: 16;
+      left: calc(24 / var(--aw) * 100%);
+      top: calc(1219 / var(--ah) * 100%);
+      width: calc(327 / var(--aw) * 100%);
+      height: calc(467 / var(--ah) * 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: calc(24 / var(--ah) * 100%);
+      text-align: center;
+      font-size: 16px;
+      line-height: 26px;
+      color: var(--brown);
+      background: transparent;
+    }
+
+    .layer-invite-text p { margin-bottom: 10px; }
+
+    .layer-invite-text__img {
+      position: relative;
+      width: calc(295 / 327 * 100%);
+      aspect-ratio: 295 / 199;
+      margin: 8px auto;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .layer-invite-text__img img {
+      position: absolute;
+      width: 100.27%;
+      height: 118.72%;
+      top: -10.5%;
+      left: -0.14%;
+      max-width: none;
+    }
+
+    .layer-invite-right {
+      z-index: 19;
+      left: calc(181 / var(--aw) * 100%);
+      top: calc(1009 / var(--ah) * 100%);
+      width: calc(266 / var(--aw) * 100%);
+      height: calc(195 / var(--ah) * 100%);
+    }
+
+    .layer-invite-right .crop > img {
+      width: 109.77%;
+      height: 100%;
+      top: 0;
+      left: -9.77%;
+    }
+
+    .layer-venue-text {
+      z-index: 12;
+      left: calc(24 / var(--aw) * 100%);
+      top: calc(845 / var(--ah) * 100%);
+      width: calc(327 / var(--aw) * 100%);
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 32px;
+      color: var(--brown);
+    }
+
+    .layer-venue-text .hoam { font-weight: 900; }
+
+    .layer-names {
+      z-index: 6;
+      left: 0;
+      top: calc(633 / var(--ah) * 100%);
+      width: 100%;
+      text-align: center;
+    }
+
+    .layer-names__row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 32px;
+      padding: 4px 0;
+    }
+
+    .layer-names__row img { width: 14px; height: 14px; }
+
+    .layer-names__date {
+      font-family: 'Noto Serif KR', serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--rose-light);
+      padding: 4px 0;
+      letter-spacing: 0.08em;
+    }
+
+    .layer-script {
+      z-index: 8;
+      left: calc(-24 / var(--aw) * 100%);
+      top: calc(81 / var(--ah) * 100%);
+      width: calc(423 / var(--aw) * 100%);
+      height: calc(225 / var(--ah) * 100%);
+    }
+
+    .layer-script .crop > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: bottom center;
+    }
+
+    .layer-label {
+      z-index: 7;
+      left: 0;
+      top: calc(61.82 / var(--ah) * 100%);
+      width: 100%;
+      text-align: center;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 4.2px;
+      color: var(--rose-title);
+      white-space: nowrap;
+    }
+
+    .layer-cal-save {
+      z-index: 17;
+      left: calc(20 / var(--aw) * 100%);
+      top: calc(1769 / var(--ah) * 100%);
+      width: calc(333 / var(--aw) * 100%);
+      pointer-events: none;
+    }
+
+    .save-date {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      width: 100%;
+      margin: 48px 0;
+    }
+
+    .save-date__hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .save-date__label {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 3.3px;
+      text-transform: uppercase;
+      color: #fffbdb;
+    }
+
+    .save-date__month {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 30px;
+      color: #fff;
+    }
+
+    .save-date__day {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: clamp(72px, 24vw, 90px);
+      line-height: 0.95;
+      color: #fff;
+    }
+
+    .save-date__meta {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      color: #fff;
+    }
+
+    .save-date__bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .save-date__cal-wrap {
+      background: #fbf6ec;
+      border-radius: 18px;
+      box-shadow: 0 14px 15px rgba(0, 0, 0, 0.18);
+      padding: 30px 18px 22px;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      width: 100%;
+    }
+
+    .cal-grid__head {
+      font-family: 'Pretendard', sans-serif;
+      font-weight: 600;
+      font-size: 10.5px;
+      letter-spacing: 0.63px;
+      color: #7a6a56;
+      padding: 8px 0 10px;
+    }
+
+    .cal-grid__head.sun { color: #ff86ae; }
+
+    .cal-grid__day {
+      font-family: 'Pretendard', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: #4f281b;
+      padding: 9px 0;
+      position: relative;
+    }
+
+    .cal-grid__day.sun { color: #c9667d; }
+    .cal-grid__day.empty { visibility: hidden; }
+
+    .cal-grid__day.wedding {
+      color: #fff;
+      font-weight: 700;
+      z-index: 1;
+    }
+
+    @keyframes cal-wedding-pulse {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 0 0 rgba(140, 22, 21, 0.12);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.08);
+        box-shadow: 0 0 16px 4px rgba(140, 22, 21, 0.32);
+      }
+    }
+
+    @keyframes cal-wedding-halo {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.4;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.45);
+        opacity: 0;
+      }
+    }
+
+    .cal-grid__day.wedding::before {
+      content: '';
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: #8c1615;
+      border-radius: 50%;
+      z-index: -1;
+      animation: cal-wedding-pulse 3.2s ease-in-out infinite;
+    }
+
+    .cal-grid__day.wedding::after {
+      content: '';
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(140, 22, 21, 0.35);
+      border-radius: 50%;
+      z-index: -2;
+      pointer-events: none;
+      animation: cal-wedding-halo 3.2s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cal-grid__day.wedding::before,
+      .cal-grid__day.wedding::after {
+        animation: none;
+      }
+    }
+
+    .save-date__countdown {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 14px;
+      letter-spacing: 1.4px;
+      color: #fffbdb;
+      text-align: center;
+      padding: 2px 0;
+    }
+
+    .rsvp-bar {
+      position: fixed;
+      bottom: max(24px, env(safe-area-inset-bottom, 24px));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 8500;
+      width: 100%;
+      max-width: 375px;
+      padding: 0 24px;
+      pointer-events: none;
+    }
+
+    .rsvp-btn {
+      display: block;
+      width: 100%;
+      height: 52px;
+      border: none;
+      border-radius: 999px;
+      background: #3b2a1c;
+      color: #f5f0e5;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(46, 33, 23, 0.35);
+      pointer-events: auto;
+      transition: transform var(--dur-fast) var(--ease-soft), box-shadow var(--dur-med) var(--ease-luxury), opacity var(--dur-fast);
+    }
+
+    .rsvp-btn:active:not(:disabled) {
+      transform: scale(0.985);
+      box-shadow: 0 4px 16px rgba(46, 33, 23, 0.28);
+    }
+
+    /* ── COUPLE INTRO ── */
+    .couple-intro {
+      position: relative;
+      padding: 60px 24px;
+      overflow: hidden;
+    }
+
+    .couple-intro__bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .couple-intro__bg-base {
+      position: absolute;
+      inset: 0;
+      background: #dadcb9;
+    }
+
+    .couple-intro__bg-paper {
+      position: absolute;
+      inset: 0;
+      mix-blend-mode: multiply;
+      overflow: hidden;
+    }
+
+    .couple-intro__bg-paper img {
+      position: absolute;
+      height: 104.73%;
+      width: 284.59%;
+      left: -167.71%;
+      top: -2.66%;
+      max-width: none;
+    }
+
+    .couple-intro__inner { position: relative; z-index: 1; }
+
+    .dict-card {
+      margin-top: 24px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 10px rgba(0,0,0,0.25);
+      background: #fff;
+    }
+
+    .dict-card__topbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 17px;
+    }
+
+    .dict-card__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+    }
+
+    .dict-card__dot.red { background: #ff5f57; }
+    .dict-card__dot.yellow { background: #ffbd2e; }
+    .dict-card__dot.green { background: #28c840; }
+
+    .dict-card__photo {
+      aspect-ratio: 235/253;
+      overflow: hidden;
+    }
+
+    .dict-card__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .dict-card__body { padding: 15px 17px; }
+
+    .dict-card__word {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--brown-dark);
+      padding-top: 10px;
+    }
+
+    .dict-card__word img { width: 20px; height: 20px; }
+
+    .dict-card__pos {
+      font-style: italic;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .dict-card__def {
+      font-size: 13px;
+      line-height: 20.8px;
+      color: var(--brown-mid);
+      margin-top: 4px;
+    }
+
+    .dict-card__sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* ── GALLERY ── */
+    .gallery {
+      padding: 60px 0;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      scroll-margin-top: 52px;
+    }
+
+    .gallery .sec-label,
+    .gallery .sec-title {
+      width: 100%;
+    }
+
+    .gallery__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 30px;
+      width: 100%;
+    }
+
+    .gallery__row {
+      display: flex;
+      gap: 4px;
+    }
+
+    .gallery__row img,
+    .gallery__col img,
+    .gallery__extra img {
+      flex: 1;
+      object-fit: cover;
+      min-width: 0;
+      cursor: pointer;
+      transition: transform var(--dur-slow) var(--ease-luxury);
+    }
+
+    .gallery__row img:active,
+    .gallery__col img:active,
+    .gallery__extra img:active {
+      transform: scale(0.985);
+    }
+
+    .gallery__row--tall img { height: 250px; }
+    .gallery__row--split { height: 252px; }
+
+    .gallery__col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .gallery__col img { flex: 1; height: 124px; }
+
+    .gallery__more {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin: 16px auto 0;
+      padding: 8px 4px;
+      background: none;
+      border: none;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--brown);
+      cursor: pointer;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity var(--dur-fast), transform var(--dur-fast) var(--ease-soft);
+    }
+
+    .gallery__more:active {
+      transform: scale(0.97);
+      opacity: 0.75;
+    }
+
+    .gallery__more img {
+      width: 24px;
+      height: 24px;
+      transform: rotate(180deg);
+      transition: transform var(--dur-slow) var(--ease-luxury);
+    }
+
+    .gallery__more.open img { transform: rotate(0); }
+
+    .gallery__extra {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 4px;
+      width: 100%;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      pointer-events: none;
+      transition:
+        max-height var(--dur-slow) var(--ease-luxury),
+        opacity var(--dur-med) var(--ease-soft),
+        margin-top var(--dur-med) var(--ease-soft);
+    }
+
+    .gallery__extra.open {
+      max-height: 820px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 20px 20px;
+      background: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0);
+      -webkit-backdrop-filter: blur(0);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity var(--dur-med) var(--ease-soft),
+        visibility var(--dur-med),
+        background var(--dur-med) var(--ease-soft),
+        backdrop-filter var(--dur-med) var(--ease-soft);
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .lightbox__img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      touch-action: pan-y pinch-zoom;
+      user-select: none;
+      -webkit-user-drag: none;
+      transform: scale(0.96);
+      opacity: 0;
+      transition:
+        transform var(--dur-slow) var(--ease-luxury),
+        opacity var(--dur-med) var(--ease-soft);
+    }
+
+    .lightbox.open .lightbox__img {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .lightbox__img.is-changing {
+      transform: scale(0.98);
+      opacity: 0.35;
+      transition-duration: 0.22s;
+    }
+
+    .lightbox__close {
+      position: absolute;
+      top: max(16px, env(safe-area-inset-top, 16px));
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--dur-fast), transform var(--dur-fast) var(--ease-soft);
+    }
+
+    .lightbox__close:active {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(0.94);
+    }
+
+    /* ── LOCATION ── */
+    .location {
+      background: var(--cream-bg);
+      padding: 48px 24px;
+      scroll-margin-top: 52px;
+    }
+
+    .location__address {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 12.8px;
+      color: var(--text-soft);
+    }
+
+    .location__address img { width: 12px; height: 12px; }
+
+    .location__note {
+      text-align: center;
+      font-size: 12.8px;
+      color: var(--text-soft);
+      margin-top: 8px;
+    }
+
+    .location__note strong { font-weight: 700; }
+
+    .location__map {
+      margin-top: 24px;
+      height: 180px;
+      background: #c8e6f5;
+      border: 1px solid #d4edf8;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .location__map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .location__btns {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .location__btns a,
+    .location__btns .btn-copy {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 6px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.66px;
+      transition: transform var(--dur-fast) var(--ease-soft), box-shadow var(--dur-med) var(--ease-luxury), filter var(--dur-fast);
+    }
+
+    .location__btns a:active,
+    .location__btns .btn-copy:active {
+      transform: scale(0.97);
+      filter: brightness(0.96);
+    }
+
+    .location__btns a {
+      text-decoration: none;
+    }
+
+    .location__btns .btn-copy {
+      border: none;
+      cursor: pointer;
+      color: var(--brown-dark);
+    }
+
+    .location__btns a img { width: 16px; height: 16px; }
+
+    .btn-naver { background: #03c75a; color: #fff; }
+    .btn-kakao { background: #fae100; color: #3c1e1e; }
+    .btn-copy { background: #d2d1ce; color: #3c1e1e; }
+    .btn-copy img { width: 24px; height: 24px; }
+
+    .location__detail { margin-top: 8px; }
+
+    .location__detail h4 {
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 2px 0;
+      color: var(--brown-dark);
+    }
+
+    .location__detail .sub {
+      font-weight: 700;
+      font-size: 14px;
+      margin-top: 14px;
+      color: var(--brown);
+    }
+
+    .location__detail p {
+      font-size: 14px;
+      line-height: 21.7px;
+      margin-top: 8px;
+      color: var(--brown-mid);
+    }
+
+    .location__notice {
+      margin-top: 16px;
+      padding: 13px 17px;
+      background: #fff;
+      border: 1px solid rgba(79, 40, 27, 0.15);
+      border-radius: 16px;
+      font-size: 14.5px;
+      line-height: 24.65px;
+      color: var(--brown-mid);
+    }
+
+    /* ── ACCOUNTS ── */
+    .accounts {
+      padding: 48px 30px;
+      background: #fff;
+      scroll-margin-top: 52px;
+    }
+
+    .accounts__intro {
+      text-align: center;
+      font-size: 14.5px;
+      line-height: 24.65px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    .acc-group { margin-top: 24px; }
+
+    .acc-group__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12.5px 16.5px;
+      border: 1px solid #d7d7d7;
+      border-radius: 16px 16px 0 0;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14.5px;
+      transition: border-radius var(--dur-med) var(--ease-luxury), box-shadow var(--dur-med) var(--ease-soft);
+    }
+
+    .acc-group__head:active {
+      opacity: 0.88;
+    }
+
+    .acc-group__head.groom {
+      background: #eef7fc;
+      color: var(--groom-blue);
+    }
+
+    .acc-group__head.bride {
+      background: #fcf2ee;
+      color: var(--bride-coral);
+      border-radius: 16px 16px 0 0;
+      margin-top: 16px;
+    }
+
+    .acc-group__head img {
+      width: 24px;
+      height: 24px;
+      transition: transform var(--dur-slow) var(--ease-luxury);
+    }
+
+    .acc-group__head.collapsed {
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(79, 40, 27, 0.06);
+    }
+
+    .acc-group__head.collapsed img { transform: rotate(180deg); }
+
+    .acc-group__body {
+      border: 1px solid #d7d7d7;
+      border-top: none;
+      border-radius: 0 0 16px 16px;
+      overflow: hidden;
+      height: auto;
+    }
+
+    .acc-group__body.is-closing,
+    .acc-group__body.is-opening {
+      overflow: hidden;
+    }
+
+    .acc-group__body.hidden {
+      display: none;
+    }
+
+    .acc-row {
+      padding: 12px 16px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .acc-row:last-child { border-bottom: none; }
+
+    .acc-row__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .acc-row__name {
+      font-weight: 500;
+      font-size: 14.4px;
+    }
+
+    .acc-row__name.groom { color: var(--groom-blue); }
+    .acc-row__name.bride { color: var(--bride-coral); }
+
+    .acc-row__bank {
+      font-size: 14px;
+      color: var(--brown-dark);
+      margin-top: 4px;
+    }
+
+    .acc-row__copy {
+      flex-shrink: 0;
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid #d4edf8;
+      background: #eef7fc;
+      color: #4fa3c4;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform var(--dur-fast) var(--ease-soft), opacity var(--dur-fast);
+    }
+
+    .acc-row__copy:active {
+      transform: scale(0.96);
+      opacity: 0.85;
+    }
+
+    .acc-row__copy.bride {
+      background: #fcf2ee;
+      border-color: #f8d4d4;
+      color: #c4614f;
+    }
+
+    .acc-row__venmo {
+      margin-top: 8px;
+      padding: 2px 8px;
+      background: #f4f0eb;
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 18px;
+    }
+
+    /* ── OUTRO ── */
+    .outro {
+      background: var(--burgundy-deep);
+      padding: 72px 30px 60px;
+      text-align: center;
+      color: #f1f6db;
+      position: relative;
+    }
+
+    .outro__title {
+      font-style: italic;
+      font-weight: 600;
+      font-size: 48px;
+      line-height: 54px;
+      color: #faf6ef;
+    }
+
+    .outro__msg {
+      font-size: 15.5px;
+      line-height: 29.45px;
+      margin-top: 18px;
+      color: #f5f0e8;
+    }
+
+    .outro__photo-composite {
+      width: 207px;
+      height: auto;
+      margin: 24px auto 0;
+      display: block;
+    }
+
+    .outro__names {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 3.24px;
+      margin-top: 20px;
+      color: #faf6ef;
+    }
+
+    .outro__date {
+      font-size: 12px;
+      letter-spacing: 2.64px;
+      margin-top: 8px;
+      opacity: 0.9;
+    }
+
+    .outro__stripes {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 10px;
+      opacity: 0.85;
+      background: repeating-linear-gradient(
+        90deg,
+        rgb(47,34,24) 0px,
+        rgb(47,34,24) 2px,
+        transparent 2px,
+        transparent 8px
+      );
+    }
+
+    .rsvp-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    /* ── RSVP MODAL ── */
+    .rsvp-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10001;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity var(--dur-med) var(--ease-soft), visibility var(--dur-med);
+    }
+
+    .rsvp-modal.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .rsvp-modal__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0);
+      -webkit-backdrop-filter: blur(0);
+      transition: background var(--dur-med) var(--ease-soft), backdrop-filter var(--dur-med) var(--ease-soft);
+    }
+
+    .rsvp-modal.open .rsvp-modal__backdrop {
+      background: rgba(0, 0, 0, 0.62);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .rsvp-modal__panel {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 375px;
+      max-height: calc(100vh - 24px);
+      max-height: calc(100dvh - 24px);
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+      padding: 20px 20px max(24px, env(safe-area-inset-bottom, 24px));
+      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12);
+      transform: translateY(105%);
+      transition: transform var(--dur-slow) var(--ease-luxury);
+    }
+
+    .rsvp-modal.open .rsvp-modal__panel {
+      transform: translateY(0);
+    }
+
+    .rsvp-modal__close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: none;
+      color: var(--brown);
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform var(--dur-fast) var(--ease-soft), opacity var(--dur-fast);
+    }
+
+    .rsvp-modal__close:active {
+      transform: scale(0.92);
+      opacity: 0.7;
+    }
+
+    .rsvp-modal__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 34px;
+      line-height: 1.1;
+      color: var(--brown-dark);
+      padding-right: 36px;
+    }
+
+    .rsvp-modal__desc {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 22px;
+      color: var(--text-muted);
+    }
+
+    .rsvp-modal__deadline {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 7px 14px;
+      border: 1px solid rgba(79, 40, 27, 0.14);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--text-soft);
+      background: var(--cream-bg);
+    }
+
+    .rsvp-form {
+      margin-top: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .rsvp-field__label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brown-dark);
+    }
+
+    .rsvp-segment {
+      display: flex;
+      gap: 8px;
+    }
+
+    .rsvp-segment__btn {
+      flex: 1;
+      min-height: 44px;
+      border: none;
+      border-radius: 12px;
+      background: var(--cream-bg);
+      color: var(--text-muted);
+      font-family: 'Noto Serif KR', serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition:
+        background var(--dur-med) var(--ease-luxury),
+        color var(--dur-med) var(--ease-luxury),
+        transform var(--dur-fast) var(--ease-soft),
+        box-shadow var(--dur-med) var(--ease-luxury);
+    }
+
+    .rsvp-segment__btn.is-active {
+      background: #465942;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(70, 89, 66, 0.22);
+    }
+
+    .rsvp-segment__btn:active {
+      transform: scale(0.98);
+    }
+
+    .rsvp-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .rsvp-row > .rsvp-field {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .rsvp-row > .rsvp-field--narrow {
+      flex: 0 0 112px;
+    }
+
+    .rsvp-input,
+    .rsvp-textarea {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      background: var(--cream-bg);
+      color: var(--brown-dark);
+      font-family: 'Noto Serif KR', serif;
+      font-size: 14px;
+      padding: 13px 14px;
+      transition: background var(--dur-fast), outline-color var(--dur-fast), box-shadow var(--dur-med) var(--ease-soft);
+    }
+
+    .rsvp-input::placeholder,
+    .rsvp-textarea::placeholder {
+      color: #b8a99a;
+    }
+
+    .rsvp-input:focus,
+    .rsvp-textarea:focus {
+      outline: 2px solid rgba(70, 89, 66, 0.35);
+      outline-offset: 0;
+    }
+
+    .rsvp-textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .rsvp-counter {
+      margin-top: 6px;
+      text-align: right;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .rsvp-stepper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 46px;
+      padding: 0 8px;
+      border-radius: 12px;
+      background: var(--cream-bg);
+    }
+
+    .rsvp-stepper__btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--brown);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      transition: transform var(--dur-fast) var(--ease-soft), box-shadow var(--dur-fast);
+    }
+
+    .rsvp-stepper__btn:active:not(:disabled) {
+      transform: scale(0.94);
+    }
+
+    .rsvp-stepper__btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .rsvp-stepper__value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--brown-dark);
+    }
+
+    .rsvp-form__error {
+      font-size: 12px;
+      color: var(--burgundy);
+      margin-top: -10px;
+    }
+
+    .rsvp-modal__submit {
+      width: 100%;
+      height: 52px;
+      margin-top: 4px;
+      border: none;
+      border-radius: 999px;
+      background: #3b2a1c;
+      color: #f5f0e5;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(46, 33, 23, 0.25);
+      transition: transform var(--dur-fast) var(--ease-soft), box-shadow var(--dur-med) var(--ease-luxury), opacity var(--dur-fast);
+    }
+
+    .rsvp-modal__submit:active:not(:disabled) {
+      transform: scale(0.985);
+    }
+
+    .rsvp-modal__submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .rsvp-modal__submit.is-loading {
+      position: relative;
+      color: transparent;
+    }
+
+    .rsvp-modal__submit.is-loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(245, 240, 229, 0.35);
+      border-top-color: #f5f0e5;
+      border-radius: 50%;
+      animation: rsvp-spin 0.7s linear infinite;
+    }
+
+    @keyframes rsvp-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* toast */
+    .toast {
+      position: fixed;
+      bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+      left: 50%;
+      transform: translateX(-50%) translateY(24px);
+      background: rgba(59, 42, 28, 0.94);
+      color: #f5f0e5;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-size: 14px;
+      z-index: 10050;
+      opacity: 0;
+      transition: transform var(--dur-slow) var(--ease-luxury), opacity var(--dur-med) var(--ease-soft);
+      pointer-events: none;
+      white-space: nowrap;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav" id="topNav" aria-label="섹션 내비게이션">
+    <a class="top-nav__link" href="#section-start">우리의 시작</a>
+    <a class="top-nav__link" href="#section-schedule">일시</a>
+    <a class="top-nav__link" href="#section-gallery">갤러리</a>
+    <a class="top-nav__link" href="#section-location">오시는 길</a>
+    <a class="top-nav__link" href="#section-heart">마음</a>
+  </nav>
+
+  <!-- FIGMA ARTBOARD: hero → calendar (absolute layer stack) -->
+  <section class="artboard" aria-label="청첩장 메인">
+    <div class="layer layer-cream"></div>
+    <div class="layer layer-pink-grad"></div>
+
+    <div class="layer layer-hero">
+      <div class="crop"><img src="assets/images/hero-bg.jpg" alt="" /></div>
+    </div>
+
+    <div class="layer layer-burgundy"></div>
+    <div class="layer layer-burgundy-pattern">
+      <div class="crop"><img src="assets/images/burgundy-pattern.png" alt="" /></div>
+    </div>
+
+    <div class="layer layer-grad-bottom"></div>
+    <div class="layer layer-grad-top"></div>
+
+    <div class="layer layer-lace">
+      <div class="crop"><img src="assets/images/lace-frame-fresh.png" alt="" /></div>
+    </div>
+
+    <div class="layer layer-clouds">
+      <div class="crop"><img src="assets/images/pink-clouds-fresh.png" alt="" /></div>
+    </div>
+
+    <div class="layer layer-hills">
+      <div class="crop"><img src="assets/images/landscape-hills-fresh.png" alt="" /></div>
+    </div>
+
+    <div class="layer layer-amelie-left">
+      <div class="crop"><img src="assets/images/amelie-left-fresh.png" alt="" /></div>
+    </div>
+
+    <div class="layer layer-invite-text">
+      <p>뉴욕 22번가 작은 프렌치 레스토랑에서<br />우연처럼 시작된 인연은<br />어느새 큰 사랑과 믿음이 되었습니다.</p>
+      <div class="layer-invite-text__img">
+        <img src="assets/images/amelie-center-fresh.png" alt="" />
+      </div>
+      <p>이제 저희는 같은 방향을 바라보며<br />평생을 함께 걸어가려 합니다.</p>
+      <p>저희의 새로운 시작을<br />함께 축복해 주시면 감사하겠습니다.</p>
+    </div>
+
+    <div class="layer layer-invite-right">
+      <div class="crop"><img src="assets/images/invitation-right-fresh.png" alt="" /></div>
+    </div>
+
+    <div class="layer layer-venue-text">
+      <p>2026년 10월 24일 일요일 오후5시</p>
+      <p>서울대학교 <span class="hoam">'호암'</span>교수회관</p>
+      <p>서울특별시 관악구 관악로 1</p>
+    </div>
+
+    <div class="layer layer-names">
+      <div class="layer-names__row">
+        <span>이제호</span>
+        <img src="assets/images/star.svg" alt="" />
+        <span>배유정</span>
+      </div>
+      <p class="layer-names__date">2026 · 10 · 24 · SUN · 5:00PM</p>
+    </div>
+
+    <div class="layer layer-script">
+      <div class="crop"><img src="assets/images/title-script.png" alt="Yujeong and Jeho" /></div>
+    </div>
+
+    <p class="layer layer-label">THE WEDDING OF</p>
+
+    <div class="layer layer-cal-save">
+      <div class="save-date">
+        <div class="save-date__hero">
+          <p class="save-date__label">Save the date</p>
+          <p class="save-date__month">October</p>
+          <p class="save-date__day">24</p>
+          <p class="save-date__meta">2026 · 10/24 (토) · 오후 5시</p>
+        </div>
+        <div class="save-date__bottom">
+          <div class="save-date__cal-wrap">
+            <div class="cal-grid" id="calGrid"></div>
+          </div>
+          <p class="save-date__countdown" id="cdline"></p>
+        </div>
+      </div>
+    </div>
+
+    <span class="scroll-anchor scroll-anchor--start" id="section-start" aria-hidden="true"></span>
+    <span class="scroll-anchor scroll-anchor--schedule" id="section-schedule" aria-hidden="true"></span>
+  </section>
+
+  <!-- COUPLE INTRO -->
+  <section class="couple-intro">
+    <div class="couple-intro__bg" aria-hidden="true">
+      <div class="couple-intro__bg-base"></div>
+      <div class="couple-intro__bg-paper">
+        <img src="assets/images/couple-intro-paper.png" alt="" />
+      </div>
+    </div>
+    <div class="couple-intro__inner">
+      <p class="sec-title">신랑 &amp; 신부를 소개합니다</p>
+      <div class="dict-card">
+        <div class="dict-card__topbar">
+          <span class="dict-card__dot red"></span>
+          <span class="dict-card__dot yellow"></span>
+          <span class="dict-card__dot green"></span>
+        </div>
+        <div class="dict-card__photo">
+          <img src="wedding%20photos/IMG_9371.JPG" alt="이제호 &amp; 배유정" />
+        </div>
+        <div class="dict-card__body">
+          <div class="dict-card__word">
+            <span>이제호 &amp; 배유정</span>
+            <img src="assets/images/speaker.svg" alt="" />
+          </div>
+          <p class="dict-card__pos">(noun)</p>
+          <div class="dict-card__def">
+            <p>한 명은 성격은 내향적, 체력은 외향적.</p>
+            <p>한명은 성격은 외향적, 체력은 내향적.</p>
+            <p>이상하게 균형이 맞는 두 사람.</p>
+          </div>
+          <p class="dict-card__sub">파생어: 약혼 → 결혼 → 평생</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="section-gallery">
+    <p class="sec-label">Gallery</p>
+    <p class="sec-title">우리의 순간들</p>
+    <div class="gallery__grid" id="galleryGrid"></div>
+    <div class="gallery__extra" id="galleryExtra"></div>
+    <button class="gallery__more" type="button" id="galleryMore">
+      <span>더보기</span>
+      <img src="assets/images/arrow-up.svg" alt="" />
+    </button>
+  </section>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" type="button" id="lightboxClose" aria-label="닫기">&times;</button>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="" />
+  </div>
+
+  <!-- LOCATION -->
+  <section class="location" id="section-location">
+    <p class="sec-label">location</p>
+    <p class="sec-title">서울대학교 호암교수회관</p>
+    <div class="location__address">
+      <img src="assets/images/pin.svg" alt="" />
+      <span>서울특별시 관악구 관악로 1</span>
+    </div>
+    <p class="location__note">※ 꼭 <strong>'호암'</strong>교수회관으로 검색해 주세요</p>
+    <div class="location__map">
+      <iframe
+        title="호암교수회관 지도"
+        src="https://maps.google.com/maps?q=37.4594,126.9517&amp;hl=ko&amp;z=16&amp;output=embed"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <div class="location__btns">
+      <a class="btn-naver" href="https://map.naver.com/p/search/%ED%98%B8%EC%95%94%EA%B5%90%EC%88%98%ED%9A%8C%EA%B4%80" target="_blank" rel="noopener">
+        <img src="assets/images/naver-icon.svg" alt="" />네이버 맵
+      </a>
+      <a class="btn-kakao" href="https://map.kakao.com/link/map/호암교수회관,37.4594,126.9517" target="_blank" rel="noopener">
+        <img src="wedding%20photos/KakaoMap_logo.png?v=202606231730" alt="" width="16" height="16" />카카오맵
+      </a>
+      <button class="btn-copy" type="button" id="copyAddress">
+        <img src="assets/images/duplicate.svg" alt="" />복사
+      </button>
+    </div>
+    <div class="location__detail">
+      <h4>대중교통 이용 시</h4>
+      <p class="sub">지하철</p>
+      <p>2호선 낙성대역 4번출구 → GS주유소 뒷편 → [장블랑제리]제과점 앞 마을버스 [관악02-1, 관악02-2] 승차 (5분 소요) → 호암교수회관 하차 → 본관 뒷편</p>
+      <p class="sub">버스</p>
+      <p>461, 641, 643, 5413, 5424, 5520, 5524, 5528 이용 낙성대하차 → GS주유소 뒷편 → [장블랑제리]제과점 앞 마을버스 [관악02-1, 관악02-2] 승차 (5분 소요) → 호암교수회관 하차 → 본관 뒷편</p>
+      <h4>자가용 이용 시</h4>
+      <p>네비게이션에 "호암 교수회관" 검색<br />호암교수회관 주차장 이용 가능 (무료)</p>
+      <div class="location__notice">
+        <p>※ 호암교수회관은 <strong>낙성대와 서울대 후문 사이</strong>에 있습니다. 서울대 정문으로 진입하지 마시고 반드시 <strong>낙성대(서울대 후문) 방향</strong>으로 오시기 바랍니다.</p>
+        <p>문의전화 : 02-880-0300</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCOUNTS -->
+  <section class="accounts" id="section-heart">
+    <p class="sec-label">with heart</p>
+    <p class="sec-title">마음 전하실 곳</p>
+    <p class="accounts__intro">
+      멀리서도 축하의 마음을<br />전하고 싶으신 분들을 위해<br />계좌번호를 안내드립니다.
+    </p>
+
+    <div class="acc-group">
+      <div class="acc-group__head groom collapsed" data-target="groomBody">
+        <span>신랑 측</span>
+        <img src="assets/images/arrow-up.svg" alt="" />
+      </div>
+      <div class="acc-group__body hidden" id="groomBody">
+        <div class="acc-row">
+          <div class="acc-row__top">
+            <div>
+              <p class="acc-row__name groom">신랑 이제호</p>
+              <p class="acc-row__bank">국민은행 | 123-456-789012</p>
+            </div>
+            <button class="acc-row__copy" data-copy="123-456-789012">복사</button>
+          </div>
+          <div class="acc-row__venmo">VENMO 또는 ZELLE로 보내시려면? (🇺🇸미국)<br />Jeholllll / 9296919353</div>
+        </div>
+        <div class="acc-row">
+          <div class="acc-row__top">
+            <div>
+              <p class="acc-row__name groom">신랑 부 이황진</p>
+              <p class="acc-row__bank">국민은행 | 123-456-789012</p>
+            </div>
+            <button class="acc-row__copy" data-copy="123-456-789012">복사</button>
+          </div>
+          <div class="acc-row__venmo">VENMO 또는 ZELLE로 보내시려면? (🇺🇸미국)<br />Jeholllll / 9296919353</div>
+        </div>
+        <div class="acc-row">
+          <div class="acc-row__top">
+            <div>
+              <p class="acc-row__name groom">신랑 모 이선균</p>
+              <p class="acc-row__bank">국민은행 | 123-456-789012</p>
+            </div>
+            <button class="acc-row__copy" data-copy="123-456-789012">복사</button>
+          </div>
+          <div class="acc-row__venmo">VENMO 또는 ZELLE로 보내시려면? (🇺🇸미국)<br />Jeholllll / 9296919353</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-group">
+      <div class="acc-group__head bride collapsed" data-target="brideBody">
+        <span>신부 측</span>
+        <img src="assets/images/arrow-up.svg" alt="" />
+      </div>
+      <div class="acc-group__body hidden" id="brideBody">
+        <div class="acc-row">
+          <div class="acc-row__top">
+            <div>
+              <p class="acc-row__name bride">신부 배유정</p>
+              <p class="acc-row__bank">국민은행 | 123-456-789012</p>
+            </div>
+            <button class="acc-row__copy bride" data-copy="123-456-789012">복사</button>
+          </div>
+          <div class="acc-row__venmo">VENMO 또는 ZELLE로 보내시려면? (🇺🇸미국)<br />Jeholllll / 9296919353</div>
+        </div>
+        <div class="acc-row">
+          <div class="acc-row__top">
+            <div>
+              <p class="acc-row__name bride">신부 부 배도수</p>
+              <p class="acc-row__bank">국민은행 | 123-456-789012</p>
+            </div>
+            <button class="acc-row__copy bride" data-copy="123-456-789012">복사</button>
+          </div>
+        </div>
+        <div class="acc-row">
+          <div class="acc-row__top">
+            <div>
+              <p class="acc-row__name bride">신부 모 김영선</p>
+              <p class="acc-row__bank">국민은행 | 123-456-789012</p>
+            </div>
+            <button class="acc-row__copy bride" data-copy="123-456-789012">복사</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTRO -->
+  <footer class="outro">
+    <p class="outro__title">Thank you</p>
+    <p class="outro__msg">새로운 시작을 소중한 분들과 함께<br />시작할 수 있어 행복합니다.</p>
+    <img class="outro__photo-composite" src="assets/images/outro-photo-composite.png" alt="이제호 &amp; 배유정" />
+    <p class="outro__names">이제호 · 배유정</p>
+    <p class="outro__date">2026 · 10 · 24</p>
+    <div class="outro__stripes"></div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="rsvp-modal" id="rsvpModal" aria-hidden="true">
+    <div class="rsvp-modal__backdrop" id="rsvpBackdrop"></div>
+    <div class="rsvp-modal__panel" role="dialog" aria-modal="true" aria-labelledby="rsvpModalTitle">
+      <button class="rsvp-modal__close" type="button" id="rsvpClose" aria-label="닫기">&times;</button>
+      <h2 class="rsvp-modal__title" id="rsvpModalTitle">Will you join us?</h2>
+      <p class="rsvp-modal__desc">참석 의사를 미리 알려주시면<br />준비에 큰 도움이 됩니다.</p>
+      <span class="rsvp-modal__deadline">회신 마감 · 2026. 10. 10 (토)</span>
+
+      <form class="rsvp-form" id="rsvpForm" novalidate>
+        <div class="rsvp-field">
+          <span class="rsvp-field__label">참석 여부</span>
+          <div class="rsvp-segment" role="group" aria-label="참석 여부">
+            <button class="rsvp-segment__btn is-active" type="button" data-group="attendance" data-value="참석합니다">참석합니다</button>
+            <button class="rsvp-segment__btn" type="button" data-group="attendance" data-value="참석이 어려워요">참석이 어려워요</button>
+          </div>
+        </div>
+
+        <div class="rsvp-field">
+          <span class="rsvp-field__label">어느 분의 하객이신가요?</span>
+          <div class="rsvp-segment" role="group" aria-label="하객 구분">
+            <button class="rsvp-segment__btn is-active" type="button" data-group="side" data-value="신랑측">신랑측</button>
+            <button class="rsvp-segment__btn" type="button" data-group="side" data-value="신부측">신부측</button>
+          </div>
+        </div>
+
+        <div class="rsvp-row">
+          <div class="rsvp-field">
+            <label class="rsvp-field__label" for="rsvpName">성함</label>
+            <input class="rsvp-input" id="rsvpName" name="name" type="text" maxlength="30" placeholder="이름을 입력해 주세요" autocomplete="name" required />
+          </div>
+          <div class="rsvp-field rsvp-field--narrow">
+            <span class="rsvp-field__label">동행 인원</span>
+            <div class="rsvp-stepper">
+              <button class="rsvp-stepper__btn" type="button" id="rsvpGuestMinus" aria-label="동행 인원 줄이기">&minus;</button>
+              <span class="rsvp-stepper__value" id="rsvpGuestValue">1</span>
+              <button class="rsvp-stepper__btn" type="button" id="rsvpGuestPlus" aria-label="동행 인원 늘리기">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rsvp-field">
+          <label class="rsvp-field__label" for="rsvpMessage">전할 말씀 (선택)</label>
+          <textarea class="rsvp-textarea" id="rsvpMessage" name="message" maxlength="200" placeholder="식사 여부, 동행 안내 등 자유롭게 남겨주세요."></textarea>
+          <p class="rsvp-counter"><span id="rsvpMessageCount">0</span> / 200</p>
+        </div>
+
+        <p class="rsvp-form__error" id="rsvpError" hidden></p>
+        <button class="rsvp-modal__submit" type="submit" id="rsvpSubmit">참석 의사 전달하기</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="rsvp-bar">
+    <button class="rsvp-btn" type="button" id="rsvpBtn">참석 여부 전달하기</button>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script>
+    const PHOTOS = [
+      'wedding%20photos/JOY_3795.JPG',
+      'wedding%20photos/JOY_5079.JPG',
+      'wedding%20photos/JOY_4548.JPG',
+      'wedding%20photos/JOY_4210.JPG',
+      'wedding%20photos/JOY_5292.JPG',
+      'wedding%20photos/JOY_4477.JPG',
+      'wedding%20photos/JOY_3527.JPG',
+      'wedding%20photos/JOY_3241.JPG',
+      'wedding%20photos/JOY_4244.JPG',
+      'wedding%20photos/JOY_5389.JPG',
+      'wedding%20photos/JOY_5759.JPG',
+      'wedding%20photos/JOY_5077.JPG',
+      'wedding%20photos/FFE5AF8F-BE70-421C-BF17-5A621D4F5ADA.jpg'
+    ];
+
+    const ADDRESS = '서울특별시 관악구 관악로 1';
+    const RSVP_CONFIG = window.RSVP_CONFIG || { endpoint: '', secret: '' };
+    const RSVP_STORAGE_KEY = 'wedding_rsvp_submitted';
+
+    // Top nav — show between hills & amelie, hide at hero top
+    (function initTopNav() {
+      const topNav = document.getElementById('topNav');
+      const artboard = document.querySelector('.artboard');
+      const ARTBOARD_H = 2400;
+      const SHOW_RATIO = (868 + 1042) / 2 / ARTBOARD_H;
+
+      function getShowThreshold() {
+        return artboard.offsetTop + artboard.offsetHeight * SHOW_RATIO;
+      }
+
+      function updateNavVisibility() {
+        topNav.classList.toggle('is-visible', window.scrollY >= getShowThreshold());
+      }
+
+      function scrollToSection(target) {
+        if (!target) return;
+        const top = target.getBoundingClientRect().top + window.scrollY - topNav.offsetHeight + 1;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      }
+
+      topNav.querySelectorAll('.top-nav__link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          scrollToSection(document.querySelector(link.getAttribute('href')));
+        });
+      });
+
+      window.addEventListener('scroll', updateNavVisibility, { passive: true });
+      window.addEventListener('resize', updateNavVisibility);
+      updateNavVisibility();
+
+      const navLinks = [...document.querySelectorAll('.top-nav__link')];
+      const navSections = navLinks
+        .map((link) => ({ link, section: document.querySelector(link.getAttribute('href')) }))
+        .filter((item) => item.section);
+
+      function updateActiveNav() {
+        const marker = window.scrollY + 96;
+        let current = navSections[0]?.section;
+        navSections.forEach(({ section }) => {
+          if (section.offsetTop <= marker) current = section;
+        });
+        navLinks.forEach((link) => {
+          const match = navSections.find((item) => item.link === link);
+          link.classList.toggle('is-active', match && match.section === current);
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveNav, { passive: true });
+      updateActiveNav();
+    })();
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.remove('show');
+      void t.offsetWidth;
+      t.classList.add('show');
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => t.classList.remove('show'), 2600);
+    }
+
+    // Calendar — October 2026, wedding on 24th (Saturday)
+    (function buildCalendar() {
+      const grid = document.getElementById('calGrid');
+      const cdline = document.getElementById('cdline');
+      const days = ['일','월','화','수','목','금','토'];
+      days.forEach((d, i) => {
+        const h = document.createElement('div');
+        h.className = 'cal-grid__head' + (i === 0 ? ' sun' : '');
+        h.textContent = d;
+        grid.appendChild(h);
+      });
+      const start = 4;
+      for (let i = 0; i < start; i++) {
+        const e = document.createElement('div');
+        e.className = 'cal-grid__day empty';
+        grid.appendChild(e);
+      }
+      for (let d = 1; d <= 31; d++) {
+        const el = document.createElement('div');
+        const dow = (start + d - 1) % 7;
+        el.className = 'cal-grid__day'
+          + (dow === 0 ? ' sun' : '')
+          + (d === 24 ? ' wedding' : '');
+        el.textContent = d;
+        grid.appendChild(el);
+      }
+
+      const WEDDING_DATE = new Date(2026, 9, 24);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      WEDDING_DATE.setHours(0, 0, 0, 0);
+      const diff = Math.round((WEDDING_DATE - today) / (1000 * 60 * 60 * 24));
+      cdline.textContent = diff > 0
+        ? `제호 ♥ 유정의 결혼식까지 D-${diff}`
+        : diff === 0
+          ? '제호 ♥ 유정의 결혼식이 오늘입니다'
+          : '제호 ♥ 유정의 결혼식을 축복해 주셔서 감사합니다';
+    })();
+
+    // Gallery
+    (function buildGallery() {
+      const grid = document.getElementById('galleryGrid');
+      const [a, b, c, d, e, ...rest] = PHOTOS;
+
+      grid.innerHTML = `
+        <div class="gallery__row gallery__row--tall">
+          <img src="${a}" alt="" loading="lazy" data-full="${a}" />
+          <img src="${b}" alt="" loading="lazy" data-full="${b}" />
+        </div>
+        <div class="gallery__row gallery__row--split">
+          <img src="${c}" alt="" loading="lazy" data-full="${c}" />
+          <div class="gallery__col">
+            <img src="${d}" alt="" loading="lazy" data-full="${d}" />
+            <img src="${e}" alt="" loading="lazy" data-full="${e}" />
+          </div>
+        </div>`;
+
+      const extra = document.getElementById('galleryExtra');
+      rest.slice(0, 6).forEach((src, i, arr) => {
+        if (i % 2 === 0) {
+          const row = document.createElement('div');
+          row.className = 'gallery__row gallery__row--tall';
+          [arr[i], arr[i + 1]].filter(Boolean).forEach(s => {
+            const img = document.createElement('img');
+            img.src = s;
+            img.alt = '';
+            img.loading = 'lazy';
+            img.dataset.full = s;
+            row.appendChild(img);
+          });
+          extra.appendChild(row);
+        }
+      });
+
+      const moreBtn = document.getElementById('galleryMore');
+      if (rest.length === 0) {
+        moreBtn.hidden = true;
+      }
+      moreBtn.addEventListener('click', () => {
+        const open = extra.classList.toggle('open');
+        moreBtn.classList.toggle('open', open);
+        moreBtn.querySelector('span').textContent = open ? '접기' : '더보기';
+      });
+
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxClose = document.getElementById('lightboxClose');
+      const gallerySources = [...document.querySelectorAll('.gallery img')]
+        .map(img => img.dataset.full || img.src);
+      let currentIndex = 0;
+      let touchStartX = 0;
+
+      function showPhoto(index) {
+        if (!gallerySources.length) return;
+        currentIndex = (index + gallerySources.length) % gallerySources.length;
+        if (!lightbox.classList.contains('open')) {
+          lightboxImg.src = gallerySources[currentIndex];
+          return;
+        }
+        lightboxImg.classList.add('is-changing');
+        window.setTimeout(() => {
+          lightboxImg.src = gallerySources[currentIndex];
+          const done = () => {
+            lightboxImg.classList.remove('is-changing');
+            lightboxImg.removeEventListener('load', done);
+          };
+          lightboxImg.addEventListener('load', done);
+          if (lightboxImg.complete) done();
+        }, 160);
+      }
+
+      function openLightbox(src) {
+        currentIndex = Math.max(0, gallerySources.indexOf(src));
+        showPhoto(currentIndex);
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        lightboxImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      function stepPhoto(delta) {
+        if (!lightbox.classList.contains('open')) return;
+        showPhoto(currentIndex + delta);
+      }
+
+      document.querySelector('.gallery').addEventListener('click', (e) => {
+        const img = e.target.closest('.gallery img');
+        if (!img) return;
+        openLightbox(img.dataset.full || img.src);
+      });
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      lightbox.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) < 40) return;
+        stepPhoto(dx < 0 ? 1 : -1);
+      }, { passive: true });
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        else if (e.key === 'ArrowLeft') stepPhoto(-1);
+        else if (e.key === 'ArrowRight') stepPhoto(1);
+      });
+    })();
+
+    // Luxury motion system (replay when scrolling into each section)
+    (function initLuxuryMotion() {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced || typeof gsap === 'undefined') return;
+
+      document.documentElement.classList.add('luxury-motion');
+      gsap.registerPlugin(ScrollTrigger);
+
+      const EASE = 'power4.out';
+      const ST = {
+        start: 'top 82%',
+        end: 'bottom 58%',
+        toggleActions: 'restart restart none none'
+      };
+
+      function revealGroup({ trigger, headings = [], texts = [], images = [], cards = [], buttons = [], once = false }) {
+        const el = typeof trigger === 'string' ? document.querySelector(trigger) : trigger;
+        if (!el) return;
+
+        const pick = (sels) => sels.flatMap((sel) => [...document.querySelectorAll(sel)]);
+        const h = pick(headings);
+        const t = pick(texts);
+        const i = pick(images);
+        const c = pick(cards);
+        const b = pick(buttons);
+        if (!h.length && !t.length && !i.length && !c.length && !b.length) return;
+
+        const scrollTrigger = once
+          ? { trigger: el, start: 'top 82%', once: true }
+          : { trigger: el, ...ST };
+
+        const tl = gsap.timeline({
+          scrollTrigger,
+          defaults: { ease: EASE }
+        });
+
+        if (h.length) {
+          tl.from(h, { y: 32, opacity: 0, duration: 1.25, stagger: 0.1 });
+        }
+        if (t.length) {
+          tl.from(t, { y: 18, opacity: 0, duration: 1.05, stagger: 0.07 }, h.length ? '-=0.9' : 0);
+        }
+        if (i.length) {
+          tl.from(i, {
+            scale: 1.04,
+            opacity: 0,
+            duration: 1.15,
+            stagger: 0.09,
+            clearProps: 'transform,opacity'
+          }, (h.length || t.length) ? '-=1' : 0);
+        }
+        if (c.length) {
+          tl.from(c, { y: 24, opacity: 0, duration: 1.05, stagger: 0.1, clearProps: 'opacity,transform' }, '-=0.95');
+        }
+        if (b.length) {
+          tl.from(b, { y: 10, opacity: 0, duration: 0.95, stagger: 0.08, clearProps: 'opacity,transform' }, '-=0.8');
+        }
+      }
+
+      revealGroup({
+        trigger: '.layer-names',
+        headings: ['.layer-label'],
+        images: ['.layer-script'],
+        texts: ['.layer-names__row', '.layer-names__date'],
+        once: true
+      });
+
+      gsap.from('.rsvp-bar', { y: 16, opacity: 0, duration: 1.05, ease: EASE, delay: 1.1 });
+
+      revealGroup({
+        trigger: '.layer-venue-text',
+        texts: ['.layer-venue-text p']
+      });
+
+      revealGroup({
+        trigger: '.layer-invite-text',
+        texts: ['.layer-invite-text > p'],
+        images: ['.layer-invite-text__img', '.layer-amelie-left', '.layer-invite-right']
+      });
+
+      revealGroup({
+        trigger: '.layer-cal-save',
+        headings: ['.save-date__label', '.save-date__month', '.save-date__day'],
+        texts: ['.save-date__meta', '.save-date__countdown'],
+        cards: ['.save-date__cal-wrap'],
+        once: true
+      });
+
+      revealGroup({
+        trigger: '.couple-intro__inner',
+        headings: ['.couple-intro .sec-title'],
+        images: ['.dict-card__photo'],
+        cards: ['.dict-card__topbar', '.dict-card__body']
+      });
+
+      revealGroup({
+        trigger: '#section-gallery',
+        headings: ['#section-gallery .sec-label', '#section-gallery .sec-title'],
+        images: ['#section-gallery .gallery__grid img'],
+        once: true
+      });
+
+      revealGroup({
+        trigger: '#section-location',
+        headings: ['#section-location .sec-label', '#section-location .sec-title'],
+        texts: [
+          '.location__address',
+          '.location__note',
+          '.location__detail h4',
+          '.location__detail > p'
+        ],
+        images: ['.location__map'],
+        buttons: ['.location__btns > *'],
+        cards: ['.location__notice']
+      });
+
+      revealGroup({
+        trigger: '#section-heart',
+        headings: ['#section-heart .sec-label', '#section-heart .sec-title'],
+        texts: ['.accounts__intro'],
+        cards: ['.acc-group']
+      });
+
+      revealGroup({
+        trigger: '.outro',
+        headings: ['.outro__title'],
+        texts: ['.outro__msg', '.outro__names', '.outro__date'],
+        images: ['.outro__photo-composite']
+      });
+    })();
+
+    // RSVP modal + Google Sheets submit
+    (function initRsvp() {
+      const modal = document.getElementById('rsvpModal');
+      const backdrop = document.getElementById('rsvpBackdrop');
+      const closeBtn = document.getElementById('rsvpClose');
+      const openBtn = document.getElementById('rsvpBtn');
+      const form = document.getElementById('rsvpForm');
+      const submitBtn = document.getElementById('rsvpSubmit');
+      const errorEl = document.getElementById('rsvpError');
+      const nameInput = document.getElementById('rsvpName');
+      const messageInput = document.getElementById('rsvpMessage');
+      const messageCount = document.getElementById('rsvpMessageCount');
+      const guestValue = document.getElementById('rsvpGuestValue');
+      const guestMinus = document.getElementById('rsvpGuestMinus');
+      const guestPlus = document.getElementById('rsvpGuestPlus');
+
+      const state = {
+        attendance: '참석합니다',
+        side: '신랑측',
+        guests: 1,
+        submitting: false
+      };
+
+      function openModal() {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        window.setTimeout(() => nameInput.focus(), 420);
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        hideError();
+      }
+
+      function hideError() {
+        errorEl.hidden = true;
+        errorEl.textContent = '';
+      }
+
+      function showError(msg) {
+        errorEl.hidden = false;
+        errorEl.textContent = msg;
+      }
+
+      function updateGuestUi() {
+        guestValue.textContent = String(state.guests);
+        guestMinus.disabled = state.guests <= 1;
+        guestPlus.disabled = state.guests >= 10;
+      }
+
+      function setSubmittedUi() {
+        openBtn.textContent = '참석 의사 전달 완료';
+        openBtn.disabled = false;
+      }
+
+      function resetSubmittedUi() {
+        openBtn.textContent = '참석 여부 전달하기';
+        openBtn.disabled = false;
+      }
+
+      if (new URLSearchParams(window.location.search).get('rsvp_reset') === '1') {
+        sessionStorage.removeItem(RSVP_STORAGE_KEY);
+        resetSubmittedUi();
+        history.replaceState(null, '', window.location.pathname);
+      } else if (sessionStorage.getItem(RSVP_STORAGE_KEY) === '1') {
+        setSubmittedUi();
+      }
+
+      openBtn.addEventListener('click', () => {
+        if (sessionStorage.getItem(RSVP_STORAGE_KEY) === '1') {
+          showToast('이미 참석 의사를 전달하셨습니다.');
+          return;
+        }
+        openModal();
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      });
+
+      modal.querySelectorAll('.rsvp-segment__btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const group = btn.dataset.group;
+          modal.querySelectorAll(`.rsvp-segment__btn[data-group="${group}"]`).forEach((b) => {
+            b.classList.toggle('is-active', b === btn);
+          });
+          state[group] = btn.dataset.value;
+        });
+      });
+
+      guestMinus.addEventListener('click', () => {
+        if (state.guests > 1) {
+          state.guests -= 1;
+          updateGuestUi();
+        }
+      });
+
+      guestPlus.addEventListener('click', () => {
+        if (state.guests < 10) {
+          state.guests += 1;
+          updateGuestUi();
+        }
+      });
+
+      messageInput.addEventListener('input', () => {
+        messageCount.textContent = String(messageInput.value.length);
+      });
+
+      updateGuestUi();
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideError();
+
+        if (state.submitting || sessionStorage.getItem(RSVP_STORAGE_KEY) === '1') return;
+
+        const name = nameInput.value.trim();
+        const message = messageInput.value.trim();
+
+        if (!name) return showError('성함을 입력해 주세요.');
+        if (name.length > 30) return showError('성함은 30자 이내로 입력해 주세요.');
+        if (message.length > 200) return showError('전할 말씀은 200자 이내로 입력해 주세요.');
+        if (!RSVP_CONFIG.endpoint) {
+          return showError('RSVP 연동이 설정되지 않았습니다. config.js에 endpoint를 입력해 주세요.');
+        }
+
+        const payload = {
+          secret: RSVP_CONFIG.secret || '',
+          submittedAt: new Date().toISOString(),
+          attendance: state.attendance,
+          side: state.side,
+          name,
+          guests: state.guests,
+          message
+        };
+
+        state.submitting = true;
+        submitBtn.disabled = true;
+        submitBtn.classList.add('is-loading');
+
+        try {
+          const pingRes = await fetch(RSVP_CONFIG.endpoint, { method: 'GET' });
+          const pingRaw = await pingRes.text();
+          let pingData;
+          try {
+            pingData = JSON.parse(pingRaw);
+          } catch {
+            throw new Error('RSVP 서버에 연결할 수 없습니다. Apps Script 배포 URL을 확인해 주세요.');
+          }
+          if (!pingRes.ok || !pingData.ok) {
+            throw new Error(pingData.error || 'RSVP 서버에 연결할 수 없습니다.');
+          }
+
+          await fetch(RSVP_CONFIG.endpoint, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+
+          sessionStorage.setItem(RSVP_STORAGE_KEY, '1');
+          setSubmittedUi();
+          closeModal();
+          showToast('참석 의사가 전달되었습니다. 감사합니다.');
+          form.reset();
+          messageCount.textContent = '0';
+          state.guests = 1;
+          state.attendance = '참석합니다';
+          state.side = '신랑측';
+          modal.querySelectorAll('.rsvp-segment__btn[data-group="attendance"]').forEach((b) => {
+            b.classList.toggle('is-active', b.dataset.value === '참석합니다');
+          });
+          modal.querySelectorAll('.rsvp-segment__btn[data-group="side"]').forEach((b) => {
+            b.classList.toggle('is-active', b.dataset.value === '신랑측');
+          });
+          updateGuestUi();
+        } catch (err) {
+          const msg = err && err.message === 'Failed to fetch'
+            ? '서버에 연결할 수 없습니다. Apps Script 새 배포와 시트 ID 설정을 확인해 주세요.'
+            : (err.message || '제출 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+          showError(msg);
+        } finally {
+          state.submitting = false;
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('is-loading');
+        }
+      });
+    })();
+
+    // Copy address
+    document.getElementById('copyAddress').addEventListener('click', () => {
+      navigator.clipboard.writeText(ADDRESS).then(() => showToast('주소가 복사되었습니다.'));
+    });
+
+    // Account copy
+    document.querySelectorAll('.acc-row__copy').forEach(btn => {
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(btn.dataset.copy).then(() => showToast('계좌번호가 복사되었습니다.'));
+      });
+    });
+
+    // Accordion
+    document.querySelectorAll('.acc-group__head').forEach(head => {
+      head.addEventListener('click', () => {
+        const body = document.getElementById(head.dataset.target);
+        const isClosed = body.classList.contains('hidden');
+        const canAnimate = typeof gsap !== 'undefined'
+          && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (canAnimate) {
+          if (isClosed) {
+            body.classList.remove('hidden');
+            body.classList.add('is-opening');
+            gsap.fromTo(body,
+              { height: 0, opacity: 0 },
+              {
+                height: 'auto',
+                opacity: 1,
+                duration: 0.58,
+                ease: 'power3.out',
+                onComplete: () => {
+                  body.style.height = '';
+                  body.classList.remove('is-opening');
+                }
+              }
+            );
+            head.classList.remove('collapsed');
+          } else {
+            body.classList.add('is-closing');
+            gsap.to(body, {
+              height: 0,
+              opacity: 0,
+              duration: 0.46,
+              ease: 'power3.inOut',
+              onComplete: () => {
+                body.classList.add('hidden');
+                body.style.height = '';
+                body.classList.remove('is-closing');
+              }
+            });
+            head.classList.add('collapsed');
+          }
+          return;
+        }
+
+        body.classList.toggle('hidden');
+        head.classList.toggle('collapsed', body.classList.contains('hidden'));
+      });
+    });
+  </script>
+</body>
+</html>
