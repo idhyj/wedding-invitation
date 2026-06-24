@@ -3,11 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>이제호 &amp; 배유정 결혼합니다</title>
+  <title>이제호 ♥ 배유정 결혼합니다</title>
+  <meta name="description" content="소중한 분들을 초대합니다." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="이제호 ♥ 배유정" />
+  <meta property="og:description" content="소중한 분들을 초대합니다." />
+  <meta property="og:image" content="/wedding%20photos/og%20image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="이제호 ♥ 배유정" />
+  <meta name="twitter:description" content="소중한 분들을 초대합니다." />
+  <meta name="twitter:image" content="/wedding%20photos/og%20image.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,600&family=Gowun+Batang&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@400;500;600;700;900&family=Pinyon+Script&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,600&family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -35,6 +46,10 @@
       --dur-fast: 0.32s;
       --dur-med: 0.52s;
       --dur-slow: 0.72s;
+      --text-body: 16px;
+      --text-caption: 14px;
+      --text-caption-sm: 12px;
+      --lh-body: 1.625;
     }
 
     button,
@@ -75,6 +90,8 @@
 
     body {
       font-family: 'Noto Serif KR', serif;
+      font-size: var(--text-body);
+      line-height: var(--lh-body);
       background: var(--burgundy-deep);
       color: var(--brown);
       width: 100%;
@@ -87,10 +104,10 @@
     img { display: block; max-width: 100%; }
 
     .sec-label {
-      font-family: 'Noto Serif KR', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-weight: 600;
-      font-size: 15px;
+      font-size: var(--text-caption);
       letter-spacing: 3.3px;
       text-transform: uppercase;
       color: var(--rose);
@@ -142,7 +159,7 @@
       min-width: 0;
       text-align: center;
       font-family: 'Noto Serif KR', serif;
-      font-size: 11.5px;
+      font-size: var(--text-caption-sm);
       font-weight: 500;
       letter-spacing: -0.02em;
       color: var(--brown);
@@ -399,7 +416,7 @@
       justify-content: flex-start;
       padding-top: calc(24 / var(--ah) * 100%);
       text-align: center;
-      font-size: 16px;
+      font-size: var(--text-body);
       line-height: 26px;
       color: var(--brown);
       background: transparent;
@@ -446,7 +463,7 @@
       top: calc(845 / var(--ah) * 100%);
       width: calc(327 / var(--aw) * 100%);
       text-align: center;
-      font-size: 16px;
+      font-size: var(--text-body);
       font-weight: 700;
       line-height: 32px;
       color: var(--brown);
@@ -508,8 +525,8 @@
       top: calc(61.82 / var(--ah) * 100%);
       width: 100%;
       text-align: center;
-      font-family: 'Noto Serif KR', serif;
-      font-size: 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: var(--text-caption);
       font-weight: 600;
       letter-spacing: 4.2px;
       color: var(--rose-title);
@@ -544,7 +561,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-weight: 600;
-      font-size: 15px;
+      font-size: var(--text-caption);
       letter-spacing: 3.3px;
       text-transform: uppercase;
       color: #fffbdb;
@@ -566,8 +583,8 @@
     }
 
     .save-date__meta {
-      font-family: 'Pretendard', -apple-system, sans-serif;
-      font-size: 14px;
+      font-family: 'Noto Serif KR', serif;
+      font-size: var(--text-caption);
       letter-spacing: 1.5px;
       color: #fff;
     }
@@ -593,9 +610,9 @@
     }
 
     .cal-grid__head {
-      font-family: 'Pretendard', sans-serif;
+      font-family: 'Noto Serif KR', serif;
       font-weight: 600;
-      font-size: 10.5px;
+      font-size: var(--text-caption-sm);
       letter-spacing: 0.63px;
       color: #7a6a56;
       padding: 8px 0 10px;
@@ -604,9 +621,9 @@
     .cal-grid__head.sun { color: #ff86ae; }
 
     .cal-grid__day {
-      font-family: 'Pretendard', sans-serif;
+      font-family: 'Noto Serif KR', serif;
       font-weight: 500;
-      font-size: 14px;
+      font-size: var(--text-caption);
       color: #4f281b;
       padding: 9px 0;
       position: relative;
@@ -680,8 +697,8 @@
     }
 
     .save-date__countdown {
-      font-family: 'Nanum Myeongjo', serif;
-      font-size: 14px;
+      font-family: 'Noto Serif KR', serif;
+      font-size: var(--text-caption);
       letter-spacing: 1.4px;
       color: #fffbdb;
       text-align: center;
@@ -709,7 +726,7 @@
       background: #3b2a1c;
       color: #f5f0e5;
       font-family: 'Noto Serif KR', serif;
-      font-size: 15px;
+      font-size: var(--text-body);
       cursor: pointer;
       box-shadow: 0 8px 24px rgba(46, 33, 23, 0.35);
       pointer-events: auto;
@@ -810,19 +827,19 @@
 
     .dict-card__pos {
       font-style: italic;
-      font-size: 11px;
+      font-size: var(--text-caption-sm);
       color: var(--text-muted);
     }
 
     .dict-card__def {
-      font-size: 13px;
-      line-height: 20.8px;
+      font-size: var(--text-body);
+      line-height: 26px;
       color: var(--brown-mid);
       margin-top: 4px;
     }
 
     .dict-card__sub {
-      font-size: 11px;
+      font-size: var(--text-caption-sm);
       color: var(--text-muted);
       margin-top: 8px;
     }
@@ -893,7 +910,7 @@
       padding: 8px 4px;
       background: none;
       border: none;
-      font-size: 16px;
+      font-size: var(--text-body);
       font-weight: 500;
       color: var(--brown);
       cursor: pointer;
@@ -912,6 +929,7 @@
       height: 24px;
       transform: rotate(180deg);
       transition: transform var(--dur-slow) var(--ease-luxury);
+      pointer-events: none;
     }
 
     .gallery__more.open img { transform: rotate(0); }
@@ -1033,7 +1051,7 @@
       justify-content: center;
       gap: 4px;
       margin-top: 8px;
-      font-size: 12.8px;
+      font-size: var(--text-caption);
       color: var(--text-soft);
     }
 
@@ -1041,7 +1059,7 @@
 
     .location__note {
       text-align: center;
-      font-size: 12.8px;
+      font-size: var(--text-caption);
       color: var(--text-soft);
       margin-top: 8px;
     }
@@ -1078,7 +1096,7 @@
       gap: 8px;
       padding: 14px 6px;
       border-radius: 16px;
-      font-size: 13px;
+      font-size: var(--text-body);
       font-weight: 500;
       letter-spacing: 0.66px;
       transition: transform var(--dur-fast) var(--ease-soft), box-shadow var(--dur-med) var(--ease-luxury), filter var(--dur-fast);
@@ -1110,7 +1128,7 @@
     .location__detail { margin-top: 8px; }
 
     .location__detail h4 {
-      font-size: 14px;
+      font-size: var(--text-body);
       font-weight: 700;
       padding: 14px 2px 0;
       color: var(--brown-dark);
@@ -1118,14 +1136,14 @@
 
     .location__detail .sub {
       font-weight: 700;
-      font-size: 14px;
+      font-size: var(--text-body);
       margin-top: 14px;
       color: var(--brown);
     }
 
     .location__detail p {
-      font-size: 14px;
-      line-height: 21.7px;
+      font-size: var(--text-body);
+      line-height: 26px;
       margin-top: 8px;
       color: var(--brown-mid);
     }
@@ -1136,8 +1154,8 @@
       background: #fff;
       border: 1px solid rgba(79, 40, 27, 0.15);
       border-radius: 16px;
-      font-size: 14.5px;
-      line-height: 24.65px;
+      font-size: var(--text-body);
+      line-height: 26px;
       color: var(--brown-mid);
     }
 
@@ -1150,8 +1168,8 @@
 
     .accounts__intro {
       text-align: center;
-      font-size: 14.5px;
-      line-height: 24.65px;
+      font-size: var(--text-body);
+      line-height: 26px;
       color: var(--text-muted);
       margin-top: 12px;
     }
@@ -1167,7 +1185,7 @@
       border-radius: 16px 16px 0 0;
       cursor: pointer;
       font-weight: 700;
-      font-size: 14.5px;
+      font-size: var(--text-body);
       transition: border-radius var(--dur-med) var(--ease-luxury), box-shadow var(--dur-med) var(--ease-soft);
     }
 
@@ -1233,14 +1251,14 @@
 
     .acc-row__name {
       font-weight: 500;
-      font-size: 14.4px;
+      font-size: var(--text-body);
     }
 
     .acc-row__name.groom { color: var(--groom-blue); }
     .acc-row__name.bride { color: var(--bride-coral); }
 
     .acc-row__bank {
-      font-size: 14px;
+      font-size: var(--text-caption);
       color: var(--brown-dark);
       margin-top: 4px;
     }
@@ -1252,7 +1270,7 @@
       border: 1px solid #d4edf8;
       background: #eef7fc;
       color: #4fa3c4;
-      font-size: 14px;
+      font-size: var(--text-caption);
       font-weight: 500;
       cursor: pointer;
       transition: transform var(--dur-fast) var(--ease-soft), opacity var(--dur-fast);
@@ -1274,7 +1292,7 @@
       padding: 2px 8px;
       background: #f4f0eb;
       border-radius: 8px;
-      font-size: 12px;
+      font-size: var(--text-caption-sm);
       color: var(--text-muted);
       line-height: 18px;
     }
@@ -1289,6 +1307,7 @@
     }
 
     .outro__title {
+      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-weight: 600;
       font-size: 48px;
@@ -1297,8 +1316,8 @@
     }
 
     .outro__msg {
-      font-size: 15.5px;
-      line-height: 29.45px;
+      font-size: var(--text-body);
+      line-height: 26px;
       margin-top: 18px;
       color: #f5f0e8;
     }
@@ -1319,10 +1338,40 @@
     }
 
     .outro__date {
-      font-size: 12px;
+      font-size: var(--text-caption-sm);
       letter-spacing: 2.64px;
       margin-top: 8px;
       opacity: 0.9;
+    }
+
+    .share-kakao {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 28px;
+      padding: 14px 22px;
+      border: none;
+      border-radius: 12px;
+      background: #fee500;
+      color: #191919;
+      font-family: 'Noto Serif KR', serif;
+      font-size: var(--text-body);
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      transition: transform var(--dur-fast) var(--ease-soft), filter var(--dur-fast);
+    }
+
+    .share-kakao:active {
+      transform: scale(0.98);
+      filter: brightness(0.96);
+    }
+
+    .share-kakao__icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
     }
 
     .outro__stripes {
@@ -1434,8 +1483,8 @@
 
     .rsvp-modal__desc {
       margin-top: 10px;
-      font-size: 14px;
-      line-height: 22px;
+      font-size: var(--text-body);
+      line-height: 26px;
       color: var(--text-muted);
     }
 
@@ -1445,7 +1494,7 @@
       padding: 7px 14px;
       border: 1px solid rgba(79, 40, 27, 0.14);
       border-radius: 999px;
-      font-size: 12px;
+      font-size: var(--text-caption-sm);
       color: var(--text-soft);
       background: var(--cream-bg);
     }
@@ -1460,7 +1509,7 @@
     .rsvp-field__label {
       display: block;
       margin-bottom: 8px;
-      font-size: 13px;
+      font-size: var(--text-caption);
       font-weight: 600;
       color: var(--brown-dark);
     }
@@ -1478,7 +1527,7 @@
       background: var(--cream-bg);
       color: var(--text-muted);
       font-family: 'Noto Serif KR', serif;
-      font-size: 13px;
+      font-size: var(--text-body);
       font-weight: 500;
       cursor: pointer;
       transition:
@@ -1520,7 +1569,7 @@
       background: var(--cream-bg);
       color: var(--brown-dark);
       font-family: 'Noto Serif KR', serif;
-      font-size: 14px;
+      font-size: var(--text-body);
       padding: 13px 14px;
       transition: background var(--dur-fast), outline-color var(--dur-fast), box-shadow var(--dur-med) var(--ease-soft);
     }
@@ -1544,7 +1593,7 @@
     .rsvp-counter {
       margin-top: 6px;
       text-align: right;
-      font-size: 11px;
+      font-size: var(--text-caption-sm);
       color: var(--text-soft);
     }
 
@@ -1582,13 +1631,13 @@
     }
 
     .rsvp-stepper__value {
-      font-size: 15px;
+      font-size: var(--text-body);
       font-weight: 600;
       color: var(--brown-dark);
     }
 
     .rsvp-form__error {
-      font-size: 12px;
+      font-size: var(--text-caption-sm);
       color: var(--burgundy);
       margin-top: -10px;
     }
@@ -1602,7 +1651,7 @@
       background: #3b2a1c;
       color: #f5f0e5;
       font-family: 'Noto Serif KR', serif;
-      font-size: 15px;
+      font-size: var(--text-body);
       font-weight: 500;
       cursor: pointer;
       box-shadow: 0 8px 24px rgba(46, 33, 23, 0.25);
@@ -1650,7 +1699,7 @@
       color: #f5f0e5;
       padding: 12px 20px;
       border-radius: 999px;
-      font-size: 14px;
+      font-size: var(--text-body);
       z-index: 10050;
       opacity: 0;
       transition: transform var(--dur-slow) var(--ease-luxury), opacity var(--dur-med) var(--ease-soft);
@@ -1954,6 +2003,12 @@
     <img class="outro__photo-composite" src="assets/images/outro-photo-composite.png" alt="이제호 &amp; 배유정" />
     <p class="outro__names">이제호 · 배유정</p>
     <p class="outro__date">2026 · 10 · 24</p>
+    <button class="share-kakao" type="button" id="shareKakaoBtn">
+      <svg class="share-kakao__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M12 3C6.477 3 2 6.477 2 10.875c0 2.793 1.857 5.245 4.656 6.645l-.984 3.563a.375.375 0 0 0 .574.414l4.125-2.719c.52.047 1.047.072 1.579.072 5.523 0 10-3.477 10-7.875S17.523 3 12 3z"/>
+      </svg>
+      카카오톡으로 공유하기
+    </button>
     <div class="outro__stripes"></div>
   </footer>
 
@@ -2037,7 +2092,34 @@
 
     const ADDRESS = '서울특별시 관악구 관악로 1';
     const RSVP_CONFIG = window.RSVP_CONFIG || { endpoint: '', secret: '' };
+    const SHARE_CONFIG = Object.assign({
+      siteUrl: '',
+      kakaoJsKey: '',
+      title: '이제호 ♥ 배유정',
+      description: '소중한 분들을 초대합니다.',
+      buttonLabel: '청첩장 보기',
+      imagePath: '/wedding%20photos/og%20image.png'
+    }, window.SHARE_CONFIG || {});
     const RSVP_STORAGE_KEY = 'wedding_rsvp_submitted';
+
+    (function applyShareMeta() {
+      const base = SHARE_CONFIG.siteUrl.replace(/\/$/, '');
+      if (!base) return;
+      const imageUrl = base + SHARE_CONFIG.imagePath;
+      const setMeta = (selector, attr, value) => {
+        const el = document.querySelector(selector);
+        if (el) el.setAttribute(attr, value);
+      };
+      setMeta('meta[property="og:image"]', 'content', imageUrl);
+      setMeta('meta[name="twitter:image"]', 'content', imageUrl);
+      let ogUrl = document.querySelector('meta[property="og:url"]');
+      if (!ogUrl) {
+        ogUrl = document.createElement('meta');
+        ogUrl.setAttribute('property', 'og:url');
+        document.head.appendChild(ogUrl);
+      }
+      ogUrl.setAttribute('content', base + '/');
+    })();
 
     // Top nav — show between hills & amelie, hide at hero top
     (function initTopNav() {
@@ -2101,6 +2183,70 @@
       clearTimeout(showToast._timer);
       showToast._timer = setTimeout(() => t.classList.remove('show'), 2600);
     }
+
+    (function initKakaoShare() {
+      const btn = document.getElementById('shareKakaoBtn');
+      if (!btn) return;
+
+      function getSiteUrl() {
+        if (SHARE_CONFIG.siteUrl) {
+          return SHARE_CONFIG.siteUrl.replace(/\/?$/, '/');
+        }
+        const pathDir = window.location.pathname.replace(/[^/]*$/, '');
+        return window.location.origin + pathDir;
+      }
+
+      function getImageUrl() {
+        const base = (SHARE_CONFIG.siteUrl || window.location.origin).replace(/\/$/, '');
+        return base + SHARE_CONFIG.imagePath;
+      }
+
+      function loadKakaoSdk() {
+        if (window.Kakao) return Promise.resolve(window.Kakao);
+        return new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js';
+          script.crossOrigin = 'anonymous';
+          script.onload = () => resolve(window.Kakao);
+          script.onerror = () => reject(new Error('Kakao SDK load failed'));
+          document.head.appendChild(script);
+        });
+      }
+
+      btn.addEventListener('click', async () => {
+        if (!SHARE_CONFIG.kakaoJsKey) {
+          showToast('config.js에 kakaoJsKey를 입력해 주세요.');
+          return;
+        }
+        try {
+          const Kakao = await loadKakaoSdk();
+          if (!Kakao.isInitialized()) Kakao.init(SHARE_CONFIG.kakaoJsKey);
+          const link = getSiteUrl();
+          Kakao.Share.sendDefault({
+            objectType: 'feed',
+            content: {
+              title: SHARE_CONFIG.title,
+              description: SHARE_CONFIG.description,
+              imageUrl: getImageUrl(),
+              link: {
+                mobileWebUrl: link,
+                webUrl: link
+              }
+            },
+            buttons: [{
+              title: SHARE_CONFIG.buttonLabel,
+              link: {
+                mobileWebUrl: link,
+                webUrl: link
+              }
+            }]
+          });
+        } catch (err) {
+          console.error(err);
+          showToast('카카오톡 공유를 열지 못했습니다.');
+        }
+      });
+    })();
 
     // Calendar — October 2026, wedding on 24th (Saturday)
     (function buildCalendar() {
@@ -2189,8 +2335,8 @@
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightboxImg');
       const lightboxClose = document.getElementById('lightboxClose');
-      const gallerySources = [...document.querySelectorAll('.gallery img')]
-        .map(img => img.dataset.full || img.src);
+      const galleryImages = [...document.querySelectorAll('.gallery__grid img, .gallery__extra img')];
+      const gallerySources = galleryImages.map(img => img.dataset.full || img.src);
       let currentIndex = 0;
       let touchStartX = 0;
 
@@ -2234,7 +2380,7 @@
       }
 
       document.querySelector('.gallery').addEventListener('click', (e) => {
-        const img = e.target.closest('.gallery img');
+        const img = e.target.closest('.gallery__grid img, .gallery__extra img');
         if (!img) return;
         openLightbox(img.dataset.full || img.src);
       });
