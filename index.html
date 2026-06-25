@@ -278,10 +278,7 @@
 
     .artboard__clip {
       position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: -12%;
+      inset: 0;
       overflow: hidden;
       pointer-events: none;
     }
@@ -330,6 +327,8 @@
       left: 8.96%;
       top: 0;
       width: 100.26%;
+      object-fit: cover;
+      object-position: center top;
     }
 
     .layer-hero .crop::after {
@@ -373,10 +372,10 @@
     }
 
     .layer-lace-bg .crop > img {
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
+      width: 145.6%;
+      height: 277.63%;
+      top: -73.05%;
+      left: -22.93%;
     }
 
     .layer-amelie-left {
@@ -409,21 +408,29 @@
       left: -9.77%;
     }
 
-    /* clouds: bottom trimmed so lace-bg.png built-in fade (~32px) is visible — no CSS gradient */
+    /* Figma 44:392 — clouds y=837, h=215, full width; bottom aligns with artboard (1052) */
     .layer-clouds {
       z-index: 10;
-      left: calc(-24 / var(--aw) * 100%);
-      top: calc(757 / var(--ah) * 100%);
-      width: calc(442 / var(--aw) * 100%);
-      height: calc(235 / var(--ah) * 100%);
+      left: 0;
+      top: calc(837 / var(--ah) * 100%);
+      width: 100%;
+      height: calc(215 / var(--ah) * 100%);
       overflow: hidden;
     }
 
     .layer-clouds .crop > img {
-      width: 100.11%;
-      height: calc(137.21 / 100 * 215 / 235 * 100%);
+      width: 118%;
+      height: 137.21%;
       top: 0;
-      left: -0.06%;
+      left: -6.47%;
+    }
+
+    .layer-clouds::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(251, 228, 234, 0) 60%, #fbe4ea 100%);
+      pointer-events: none;
     }
 
     /* Figma 44:393 — lace card, spans hero bottom + lace background */
@@ -2221,6 +2228,7 @@
         <span class="layer-scroll-cue__line"></span>
       </div>
     </div>
+    </div>
 
     <div class="layer layer-amelie-left">
       <div class="crop"><img src="assets/images/amelie-left-fresh.png" alt="" /></div>
@@ -2228,7 +2236,6 @@
 
     <div class="layer layer-invite-right">
       <div class="crop"><img src="assets/images/invitation-right-fresh.png" alt="" /></div>
-    </div>
     </div>
   </section>
 
