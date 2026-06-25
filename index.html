@@ -68,6 +68,8 @@
       font-size: 16px;
       scroll-behavior: smooth;
       background: #e2d8d1;
+      overflow-x: hidden;
+      max-width: 100%;
     }
 
     html.luxury-motion .layer:not(.motion-target),
@@ -97,6 +99,16 @@
       max-width: 100%;
       margin: 0;
       overflow-x: hidden;
+      position: relative;
+      touch-action: pan-y;
+      overscroll-behavior-x: none;
+    }
+
+    body > nav,
+    body > section,
+    body > footer {
+      max-width: 100%;
+      overflow-x: clip;
     }
 
     input,
@@ -262,6 +274,20 @@
       aspect-ratio: 375 / 1052;
       overflow: visible;
       background: #e2d8d1;
+    }
+
+    .artboard__clip {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: -12%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .artboard__clip .layer--interactive {
+      pointer-events: auto;
     }
 
     .artboard.artboard--schedule {
@@ -935,7 +961,7 @@
       flex-direction: column;
       align-items: center;
       gap: 24px;
-      overflow: visible;
+      overflow-x: clip;
     }
 
     .the-couple__bg {
@@ -985,21 +1011,21 @@
 
     .the-couple__polaroids {
       position: relative;
-      width: 488.157px;
-      height: 325px;
+      width: min(488.157px, 100%);
+      max-width: 100%;
+      aspect-ratio: 488.157 / 325;
       flex-shrink: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: visible;
+      overflow: hidden;
     }
 
     .the-couple__polaroid-composite {
-      width: 488.157px;
-      height: 325px;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
       display: block;
-      max-width: none;
     }
 
     .the-couple__profiles {
@@ -2150,6 +2176,7 @@
 
   <!-- FIGMA ARTBOARD: Hero (리뉴얼 44:12, y=0–1052) -->
   <section class="artboard" aria-label="청첩장 메인">
+    <div class="artboard__clip">
     <div class="layer layer-hero">
       <div class="crop"><img src="assets/images/hero-bg.jpg" alt="" /></div>
     </div>
@@ -2201,6 +2228,7 @@
 
     <div class="layer layer-invite-right">
       <div class="crop"><img src="assets/images/invitation-right-fresh.png" alt="" /></div>
+    </div>
     </div>
   </section>
 
