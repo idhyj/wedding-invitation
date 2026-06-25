@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://wedding-invitation-sooty-eight.vercel.app/wedding%20photos/og%20image.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,600&family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,600&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -53,16 +53,15 @@
       --text-caption: 14px;
       --text-caption-sm: 12px;
       --lh-body: 1.625;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Gowun Batang', serif;
+      --font-ui: 'Noto Serif KR', serif;
     }
 
     button,
     a,
     .acc-group__head {
       -webkit-tap-highlight-color: transparent;
-    }
-
-    button {
-      font-family: inherit;
     }
 
     html {
@@ -72,18 +71,11 @@
     }
 
     html.luxury-motion .layer:not(.motion-target),
-    html.luxury-motion .couple-intro__bg,
-    html.luxury-motion .layer-cream,
-    html.luxury-motion .layer-pink-grad,
     html.luxury-motion .layer-hero,
-    html.luxury-motion .layer-burgundy,
-    html.luxury-motion .layer-burgundy-pattern,
-    html.luxury-motion .layer-grad-bottom,
-    html.luxury-motion .layer-grad-top,
-    html.luxury-motion .layer-lace,
-    html.luxury-motion .layer-clouds,
-    html.luxury-motion .layer-hills,
-    html.luxury-motion .outro__stripes {
+    html.luxury-motion .layer-schedule-bg,
+    html.luxury-motion .layer-lace-bg,
+    html.luxury-motion .layer-lace-card,
+    html.luxury-motion .layer-clouds {
       transform: none !important;
       filter: none !important;
     }
@@ -96,7 +88,7 @@
     }
 
     body {
-      font-family: 'Noto Serif KR', serif;
+      font-family: var(--font-body);
       font-size: var(--text-body);
       line-height: var(--lh-body);
       background: #e2d8d1;
@@ -105,13 +97,37 @@
       max-width: 100%;
       margin: 0;
       overflow-x: hidden;
-      padding-bottom: calc(52px + 24px + 16px);
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+      font-family: var(--font-ui);
+    }
+
+    .top-nav__link,
+    .location__btns a,
+    .location__btns .btn-copy,
+    .acc-group__head,
+    .cal-grid__head,
+    .cal-grid__day {
+      font-family: var(--font-ui);
+    }
+
+    .sec-label,
+    .layer-label,
+    .save-date__label,
+    .save-date__month,
+    .save-date__day,
+    .layer-scroll-cue__label,
+    .rsvp-modal__title {
+      font-family: var(--font-display);
     }
 
     img { display: block; max-width: 100%; }
 
     .sec-label {
-      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-weight: 600;
       font-size: var(--text-caption);
@@ -128,6 +144,36 @@
       color: var(--brown);
       text-align: center;
       margin-top: 8px;
+    }
+
+    .sec-heading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .sec-heading .sec-label {
+      margin: 0;
+    }
+
+    .sec-title-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2px 0;
+      width: 100%;
+    }
+
+    .sec-title-block .sec-title {
+      margin-top: 0;
+    }
+
+    .sec-title__ribbon {
+      width: 120px;
+      height: 56px;
+      object-fit: cover;
     }
 
     /* ── TOP NAV ── */
@@ -167,7 +213,6 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      font-family: 'Noto Serif KR', serif;
       font-size: var(--text-body);
       font-weight: 500;
       letter-spacing: -0.02em;
@@ -205,29 +250,31 @@
       color: var(--burgundy);
     }
 
-    .scroll-anchor {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      pointer-events: none;
-      scroll-margin-top: 52px;
-    }
-
-    .scroll-anchor--start { top: calc(1219 / var(--ah) * 100%); }
-    .scroll-anchor--schedule { top: calc(1769 / var(--ah) * 100%); }
-
-    /* ── FIGMA ARTBOARD (hero → calendar) ── */
+    /* ── FIGMA ARTBOARD (리뉴얼 44:12 hero: 0–1052) ── */
     .artboard {
       --aw: 375;
-      --ah: 2400;
+      --ah: 1052;
       position: relative;
+      z-index: 3;
       width: 100%;
       max-width: 100%;
-      margin: 0;
-      aspect-ratio: 375 / 2400;
-      overflow: hidden;
+      margin: 0 0 0;
+      aspect-ratio: 375 / 1052;
+      overflow: visible;
       background: #e2d8d1;
+    }
+
+    .artboard.artboard--schedule {
+      aspect-ratio: auto;
+      height: auto;
+      min-height: 0;
+      padding: 60px 24px;
+      background: #fbe4ea;
+      scroll-margin-top: 52px;
+      box-sizing: border-box;
+      display: block;
+      position: relative;
+      overflow: hidden;
     }
 
     .layer {
@@ -244,37 +291,12 @@
       display: block;
     }
 
-    .layer-cream {
-      z-index: 1;
-      left: 0;
-      top: calc(820 / var(--ah) * 100%);
-      width: 100%;
-      height: calc(343 / var(--ah) * 100%);
-      background: #e2d8d1;
-    }
-
-    .layer-pink-grad {
-      z-index: 2;
-      left: 0;
-      top: calc(1080 / var(--ah) * 100%);
-      width: 100%;
-      height: calc(641 / var(--ah) * 100%);
-      background: linear-gradient(
-        180deg,
-        rgba(252, 195, 207, 0.55) 0%,
-        #fdc3cf 8%,
-        #f5d5dc 30%,
-        #e9e1dc 55%,
-        #e2d8d1 100%
-      );
-    }
-
     .layer-hero {
-      z-index: 3;
-      left: calc(-145 / var(--aw) * 100%);
+      z-index: 6;
+      left: calc(-124 / var(--aw) * 100%);
       top: 0;
-      width: calc(545 / var(--aw) * 100%);
-      height: calc(820 / var(--ah) * 100%);
+      width: calc(503 / var(--aw) * 100%);
+      height: calc(757 / var(--ah) * 100%);
     }
 
     .layer-hero .crop > img {
@@ -284,198 +306,139 @@
       width: 100.26%;
     }
 
-    .layer-burgundy {
-      z-index: 13;
-      left: 0;
-      top: calc(1721 / var(--ah) * 100%);
-      width: 100%;
-      height: calc(679 / var(--ah) * 100%);
-      background: #7e2a24;
+    .layer-hero .crop::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(52, 36, 26, 0) 64.135%, rgb(52, 36, 26) 100%),
+        linear-gradient(180deg, rgb(52, 36, 26) 0%, rgba(52, 36, 26, 0) 38.111%);
+      pointer-events: none;
     }
 
-    .layer-burgundy-pattern {
-      z-index: 14;
-      left: calc(-258 / var(--aw) * 100%);
-      top: calc(1721 / var(--ah) * 100%);
-      width: calc(1001 / var(--aw) * 100%);
-      height: calc(679 / var(--ah) * 100%);
-      opacity: 0.4;
-    }
-
-    .layer-burgundy-pattern .crop > img {
-      width: 100%;
-      height: 147.34%;
-      top: -0.03%;
-      left: 0;
-    }
-
-    .layer-grad-bottom {
-      z-index: 4;
-      left: 0;
-      top: calc(605 / var(--ah) * 100%);
-      width: 100%;
-      height: calc(217 / var(--ah) * 100%);
-      background: linear-gradient(180deg, rgba(52,36,26,0) 0%, #34241a 100%);
-    }
-
-    .layer-grad-top {
-      z-index: 5;
+    .layer-schedule-bg {
+      z-index: 1;
       left: 0;
       top: 0;
       width: 100%;
-      height: calc(306 / var(--ah) * 100%);
-      background: linear-gradient(0deg, rgba(52,36,26,0) 0%, #34241a 100%);
+      height: 100%;
+      overflow: hidden;
     }
 
-    .layer-hills {
-      z-index: 9;
-      left: calc(-86 / var(--aw) * 100%);
-      top: calc(868 / var(--ah) * 100%);
-      width: calc(546 / var(--aw) * 100%);
+    .layer-schedule-bg .crop > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    /* Figma 44:391 — lace background, y=757, 0px below hero */
+    .layer-lace-bg {
+      z-index: 2;
+      left: 0;
+      top: calc(757 / var(--ah) * 100%);
+      width: 100%;
       height: calc(295 / var(--ah) * 100%);
+      overflow: hidden;
     }
 
-    .layer-hills .crop {
-      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 88%);
-      mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 88%);
-    }
-
-    .layer-hills .crop > img {
+    .layer-lace-bg .crop > img {
       width: 100%;
-      height: 277.63%;
-      top: -73.05%;
-      left: 0;
-    }
-
-    .layer-hills::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(253, 195, 207, 0.28) 0%, transparent 40%);
-      pointer-events: none;
-    }
-
-    .layer-lace {
-      z-index: 11;
-      left: calc(-101 / var(--aw) * 100%);
-      top: calc(688 / var(--ah) * 100%);
-      width: calc(576 / var(--aw) * 100%);
-      height: calc(354 / var(--ah) * 100%);
-    }
-
-    .layer-lace .crop > img {
-      width: 100%;
-      height: 108.47%;
+      height: 100%;
       top: 0;
       left: 0;
-    }
-
-    .layer-clouds {
-      z-index: 10;
-      left: calc(-24 / var(--aw) * 100%);
-      top: calc(948 / var(--ah) * 100%);
-      width: calc(442 / var(--aw) * 100%);
-      height: calc(215 / var(--ah) * 100%);
-    }
-
-    .layer-clouds .crop {
-      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 50%, transparent 100%);
-      mask-image: linear-gradient(180deg, #000 0%, #000 50%, transparent 100%);
-    }
-
-    .layer-clouds .crop > img {
-      width: 100.11%;
-      height: 137.21%;
-      top: 0;
-      left: -0.06%;
-    }
-
-    .layer-clouds::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(252, 195, 207, 0) 60%, #fcc3cf 100%);
-      pointer-events: none;
     }
 
     .layer-amelie-left {
-      z-index: 15;
-      left: calc(-133 / var(--aw) * 100%);
-      top: calc(1042 / var(--ah) * 100%);
+      z-index: 14;
+      left: calc(-151 / var(--aw) * 100%);
+      top: calc(945 / var(--ah) * 100%);
       width: calc(301 / var(--aw) * 100%);
-      height: calc(209 / var(--ah) * 100%);
+      height: calc(159 / var(--ah) * 100%);
     }
 
     .layer-amelie-left .crop > img {
       width: 104.32%;
-      height: 100.16%;
-      top: -0.08%;
+      height: 131.66%;
+      top: -11.43%;
       left: 0;
     }
 
-    .layer-invite-text {
-      z-index: 16;
-      left: calc(24 / var(--aw) * 100%);
-      top: calc(1219 / var(--ah) * 100%);
-      width: calc(327 / var(--aw) * 100%);
-      height: calc(467 / var(--ah) * 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding-top: calc(24 / var(--ah) * 100%);
-      text-align: center;
-      font-size: var(--text-body);
-      line-height: 26px;
-      color: var(--brown);
-      background: transparent;
-    }
-
-    .layer-invite-text p { margin-bottom: 10px; }
-
-    .layer-invite-text__img {
-      position: relative;
-      width: calc(295 / 327 * 100%);
-      aspect-ratio: 295 / 199;
-      margin: 8px auto;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .layer-invite-text__img img {
-      position: absolute;
-      width: 100.27%;
-      height: 118.72%;
-      top: -10.5%;
-      left: -0.14%;
-      max-width: none;
-    }
-
     .layer-invite-right {
-      z-index: 19;
-      left: calc(181 / var(--aw) * 100%);
-      top: calc(1009 / var(--ah) * 100%);
+      z-index: 14;
+      left: calc(218 / var(--aw) * 100%);
+      top: calc(931 / var(--ah) * 100%);
       width: calc(266 / var(--aw) * 100%);
-      height: calc(195 / var(--ah) * 100%);
+      height: calc(143 / var(--ah) * 100%);
     }
 
     .layer-invite-right .crop > img {
       width: 109.77%;
-      height: 100%;
-      top: 0;
+      height: 136.36%;
+      top: -15.38%;
       left: -9.77%;
     }
 
-    .layer-venue-text {
+    /* clouds: bottom trimmed so lace-bg.png built-in fade (~32px) is visible — no CSS gradient */
+    .layer-clouds {
+      z-index: 10;
+      left: calc(-24 / var(--aw) * 100%);
+      top: calc(757 / var(--ah) * 100%);
+      width: calc(442 / var(--aw) * 100%);
+      height: calc(235 / var(--ah) * 100%);
+      overflow: hidden;
+    }
+
+    .layer-clouds .crop > img {
+      width: 100.11%;
+      height: calc(137.21 / 100 * 215 / 235 * 100%);
+      top: 0;
+      left: -0.06%;
+    }
+
+    /* Figma 44:393 — lace card, spans hero bottom + lace background */
+    .layer-lace-card {
       z-index: 12;
+      left: calc(-104 / var(--aw) * 100%);
+      top: calc(676 / var(--ah) * 100%);
+      width: calc(576 / var(--aw) * 100%);
+      height: calc(294 / var(--ah) * 100%);
+    }
+
+    .layer-lace-card .crop > img {
+      width: 100%;
+      height: 130.61%;
+      top: -17.01%;
+      left: 0;
+    }
+
+    /* Figma 44:394 — x=24, y=777, 327×96, lace oval center */
+    .layer-venue-text {
+      z-index: 13;
       left: calc(24 / var(--aw) * 100%);
-      top: calc(845 / var(--ah) * 100%);
+      top: calc(777 / var(--ah) * 100%);
       width: calc(327 / var(--aw) * 100%);
+      height: calc(96 / var(--ah) * 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       font-size: var(--text-body);
       font-weight: 700;
       line-height: 32px;
       color: var(--brown);
+      pointer-events: none;
+    }
+
+    .layer-venue-text p {
+      margin: 0;
+      width: 100%;
+      text-align: center;
     }
 
     .layer-venue-text .hoam { font-weight: 900; }
@@ -483,7 +446,7 @@
     .layer-names {
       z-index: 6;
       left: 0;
-      top: calc(633 / var(--ah) * 100%);
+      top: calc(542 / var(--ah) * 100%);
       width: 100%;
       text-align: center;
     }
@@ -500,23 +463,42 @@
       padding: 4px 0;
     }
 
-    .layer-names__row img { width: 14px; height: 14px; }
+    .layer-names__star {
+      font-size: 15px;
+      line-height: 15px;
+      letter-spacing: 4px;
+    }
 
     .layer-names__date {
-      font-family: 'Noto Serif KR', serif;
-      font-weight: 600;
-      font-size: 18px;
-      color: var(--rose-light);
-      padding: 4px 0;
-      letter-spacing: 0.08em;
+      display: none;
+    }
+
+    .layer-hero-title {
+      z-index: 8;
+      left: 0;
+      top: calc(61.82 / var(--ah) * 100%);
+      width: 100%;
+      height: calc(231 / var(--ah) * 100%);
+      pointer-events: none;
+    }
+
+    .layer-hero-title .layer-label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: calc(20 / 231 * 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .layer-script {
-      z-index: 8;
-      left: calc(-56 / var(--aw) * 100%);
-      top: calc(72 / var(--ah) * 100%);
-      width: calc(487 / var(--aw) * 100%);
-      height: calc(259 / var(--ah) * 100%);
+      position: absolute;
+      top: calc(32 / 231 * 100%);
+      left: 0;
+      width: 100%;
+      height: calc(199 / 231 * 100%);
     }
 
     .layer-script .crop > img {
@@ -524,29 +506,104 @@
       inset: 0;
       width: 100%;
       height: 100%;
+      max-width: none;
       object-fit: contain;
-      object-position: bottom center;
+      object-position: center bottom;
     }
 
     .layer-label {
-      z-index: 7;
-      left: 0;
-      top: calc(61.82 / var(--ah) * 100%);
       width: 100%;
       text-align: center;
-      font-family: 'Cormorant Garamond', serif;
       font-size: var(--text-caption);
       font-weight: 600;
+      line-height: 20px;
       letter-spacing: 4.2px;
       color: var(--rose-title);
       white-space: nowrap;
     }
 
+    .layer-scroll-cue {
+      z-index: 6;
+      left: 0;
+      top: calc(582 / var(--ah) * 100%);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-top: 14px;
+    }
+
+    .layer-scroll-cue__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      width: 46px;
+    }
+
+    .layer-scroll-cue__label {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: 3.06px;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+    }
+
+    .layer-scroll-cue__line {
+      position: relative;
+      display: block;
+      width: 1px;
+      height: 26px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .layer-scroll-cue__line::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1px;
+      height: 26px;
+      background: rgba(255, 255, 255, 0.5);
+      animation: scroll-cue-line 2s ease-in-out infinite;
+    }
+
+    @keyframes scroll-cue-line {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+
+      18% {
+        opacity: 1;
+      }
+
+      82% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .layer-scroll-cue__line::after {
+        animation: none;
+        transform: none;
+        opacity: 1;
+      }
+    }
+
     .layer-cal-save {
-      z-index: 17;
-      left: calc(20 / var(--aw) * 100%);
-      top: calc(1769 / var(--ah) * 100%);
-      width: calc(333 / var(--aw) * 100%);
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: 333px;
+      margin: 0 auto;
       pointer-events: none;
     }
 
@@ -555,7 +612,6 @@
       flex-direction: column;
       gap: 36px;
       width: 100%;
-      margin: 48px 0;
     }
 
     .save-date__hero {
@@ -567,35 +623,41 @@
     }
 
     .save-date__label {
-      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-weight: 600;
-      font-size: var(--text-caption);
+      font-size: 15px;
+      line-height: 18px;
       letter-spacing: 3.3px;
       text-transform: uppercase;
-      color: #fffbdb;
+      color: #7e2a24;
+    }
+
+    .save-date__ribbon {
+      width: 120px;
+      height: 56px;
+      object-fit: cover;
     }
 
     .save-date__month {
-      font-family: 'Cormorant Garamond', serif;
       font-weight: 600;
       font-size: 30px;
-      color: #fff;
+      line-height: 36px;
+      color: #7e2a24;
     }
 
     .save-date__day {
-      font-family: 'Cormorant Garamond', serif;
       font-weight: 500;
-      font-size: clamp(72px, 24vw, 90px);
-      line-height: 0.95;
-      color: #fff;
+      font-size: 90px;
+      line-height: 95.68px;
+      color: #7e2a24;
     }
 
     .save-date__meta {
-      font-family: 'Noto Serif KR', serif;
-      font-size: var(--text-caption);
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
       letter-spacing: 1.5px;
-      color: #fff;
+      color: #7e2a24;
     }
 
     .save-date__bottom {
@@ -619,9 +681,9 @@
     }
 
     .cal-grid__head {
-      font-family: 'Noto Serif KR', serif;
       font-weight: 600;
-      font-size: var(--text-caption-sm);
+      font-size: 10.5px;
+      line-height: normal;
       letter-spacing: 0.63px;
       color: #7a6a56;
       padding: 8px 0 10px;
@@ -630,9 +692,9 @@
     .cal-grid__head.sun { color: #ff86ae; }
 
     .cal-grid__day {
-      font-family: 'Noto Serif KR', serif;
       font-weight: 500;
-      font-size: var(--text-caption);
+      font-size: 14px;
+      line-height: 17px;
       color: #4f281b;
       padding: 9px 0;
       position: relative;
@@ -706,11 +768,13 @@
     }
 
     .save-date__countdown {
-      font-family: 'Noto Serif KR', serif;
-      font-size: var(--text-caption);
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 18px;
       letter-spacing: 1.4px;
-      color: #fffbdb;
+      color: #621b16;
       text-align: center;
+      margin: 0;
       padding: 2px 0;
     }
 
@@ -734,7 +798,6 @@
       border-radius: 999px;
       background: #3b2a1c;
       color: #f5f0e5;
-      font-family: 'Noto Serif KR', serif;
       font-size: var(--text-body);
       cursor: pointer;
       box-shadow: 0 8px 24px rgba(46, 33, 23, 0.35);
@@ -747,42 +810,52 @@
       box-shadow: 0 4px 16px rgba(46, 33, 23, 0.28);
     }
 
-    /* ── COUPLE INTRO ── */
+    /* ── COUPLE INTRO (Our Story) — Figma 44:14: 723×375, padding 60/24 ── */
     .couple-intro {
       position: relative;
+      z-index: 1;
+      width: 100%;
+      margin: 0;
       padding: 60px 24px;
+      box-sizing: border-box;
+      background: linear-gradient(180deg, #fbe4ea 0%, #fdf9ef 65%);
+      scroll-margin-top: 52px;
+    }
+
+    .couple-intro__inner {
+      width: 100%;
+      max-width: 327px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .our-story__text {
+      font-size: var(--text-body);
+      line-height: 32px;
+      color: var(--brown);
+      text-align: center;
+      margin: 0;
+    }
+
+    .our-story__figure {
+      position: relative;
+      width: 295px;
+      height: 199px;
       overflow: hidden;
+      flex-shrink: 0;
     }
 
-    .couple-intro__bg {
+    .our-story__figure img {
       position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .couple-intro__bg-base {
-      position: absolute;
-      inset: 0;
-      background: #dadcb9;
-    }
-
-    .couple-intro__bg-paper {
-      position: absolute;
-      inset: 0;
-      mix-blend-mode: multiply;
-      overflow: hidden;
-    }
-
-    .couple-intro__bg-paper img {
-      position: absolute;
-      height: 104.73%;
-      width: 284.59%;
-      left: -167.71%;
-      top: -2.66%;
+      width: 100.27%;
+      height: 118.72%;
+      top: -10.5%;
+      left: -0.14%;
       max-width: none;
     }
-
-    .couple-intro__inner { position: relative; z-index: 1; }
 
     .dict-card {
       margin-top: 24px;
@@ -853,6 +926,194 @@
       margin-top: 8px;
     }
 
+    /* ── THE COUPLE (Figma 44:127) ── */
+    .the-couple {
+      position: relative;
+      padding: 60px 0;
+      scroll-margin-top: 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      overflow: visible;
+    }
+
+    .the-couple__bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .the-couple__bg-fill {
+      position: absolute;
+      inset: 0;
+      background: #fef7e8;
+    }
+
+    .the-couple__bg-grid-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      mix-blend-mode: multiply;
+    }
+
+    .the-couple__bg-grid-wrap img {
+      position: absolute;
+      width: 310.59%;
+      height: 106.37%;
+      left: -180.71%;
+      top: -2.47%;
+      max-width: none;
+    }
+
+    .the-couple__inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 327px;
+      padding: 0 24px;
+      box-sizing: content-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .the-couple .sec-heading {
+      width: 100%;
+    }
+
+    .the-couple__polaroids {
+      position: relative;
+      width: 488.157px;
+      height: 325px;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;
+    }
+
+    .the-couple__polaroid-composite {
+      width: 488.157px;
+      height: 325px;
+      object-fit: contain;
+      display: block;
+      max-width: none;
+    }
+
+    .the-couple__profiles {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .the-couple__profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 115.991px;
+    }
+
+    .the-couple__profile-name {
+      font-size: 21px;
+      font-weight: 500;
+      letter-spacing: 2.52px;
+      color: var(--brown);
+      text-align: center;
+      line-height: normal;
+    }
+
+    .the-couple__traits {
+      text-align: center;
+    }
+
+    .the-couple__trait {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 2.52px;
+      color: var(--brown);
+      line-height: normal;
+      white-space: nowrap;
+    }
+
+    .the-couple__trait + .the-couple__trait {
+      margin-top: 0;
+    }
+
+    .the-couple__hl {
+      position: relative;
+      display: inline-block;
+    }
+
+    .the-couple__hl::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 1px;
+      transform: translateX(-50%);
+      width: 52.991px;
+      height: 8px;
+      background: url('assets/images/the-couple/brush-stroke.svg') no-repeat center / contain;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .the-couple__divider {
+      width: 36.035px;
+      height: 119px;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .the-couple__divider img {
+      position: absolute;
+      width: 353.49%;
+      height: 160.56%;
+      left: -125.58%;
+      top: -18.31%;
+      max-width: none;
+    }
+
+    .the-couple__bubble {
+      position: relative;
+      width: 349px;
+      max-width: 100%;
+      height: 131px;
+    }
+
+    .the-couple__bubble-img-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .the-couple__bubble-img-wrap img {
+      position: absolute;
+      width: 100%;
+      height: 132.98%;
+      top: -16.11%;
+      left: 0;
+      max-width: none;
+    }
+
+    .the-couple__bubble-text {
+      position: relative;
+      z-index: 1;
+      padding-top: 43px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 2.52px;
+      color: var(--brown);
+      line-height: normal;
+    }
+
     /* ── GALLERY ── */
     .gallery {
       padding: 60px 0;
@@ -863,6 +1124,7 @@
       scroll-margin-top: 52px;
     }
 
+    .gallery .sec-heading,
     .gallery .sec-label,
     .gallery .sec-title {
       width: 100%;
@@ -919,7 +1181,6 @@
       padding: 8px 4px;
       background: none;
       border: none;
-      font-family: inherit;
       font-size: var(--text-body);
       font-weight: 500;
       color: var(--brown);
@@ -1050,9 +1311,39 @@
 
     /* ── LOCATION ── */
     .location {
-      background: var(--cream-bg);
+      background: #fdf9ef;
       padding: 48px 24px;
       scroll-margin-top: 52px;
+    }
+
+    .location__header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 32px;
+    }
+
+    .location__label-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .location__label-block .sec-label {
+      margin: 0;
+      line-height: 18px;
+    }
+
+    .location__ribbon {
+      width: 120px;
+      height: 56px;
+      object-fit: cover;
+    }
+
+    .location .sec-title {
+      margin-top: 0;
     }
 
     .location__address {
@@ -1106,7 +1397,6 @@
       gap: 8px;
       padding: 14px 6px;
       border-radius: 16px;
-      font-family: inherit;
       font-size: var(--text-body);
       font-weight: 500;
       letter-spacing: 0.66px;
@@ -1173,30 +1463,65 @@
     /* ── ACCOUNTS ── */
     .accounts {
       padding: 48px 30px;
-      background: #fff;
+      background: #f3f2f1;
       scroll-margin-top: 52px;
+    }
+
+    .accounts__center {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 100%;
+    }
+
+    .accounts__header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .accounts__header .sec-label {
+      margin: 0;
+      line-height: 18px;
+    }
+
+    .accounts .sec-title-block .sec-title {
+      margin-top: 0;
     }
 
     .accounts__intro {
       text-align: center;
-      font-size: var(--text-body);
-      line-height: 26px;
-      color: var(--text-muted);
-      margin-top: 12px;
+      font-size: 14.5px;
+      line-height: 24.65px;
+      color: #7a6a56;
+      margin: 0;
+      padding-top: 11.32px;
     }
 
-    .acc-group { margin-top: 24px; }
+    .accounts__groups {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+      width: 100%;
+    }
+
+    .acc-group { margin-top: 0; }
 
     .acc-group__head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12.5px 16.5px;
-      border: 1px solid #d7d7d7;
+      padding: 12px 16px;
+      border: none;
       border-radius: 16px 16px 0 0;
       cursor: pointer;
       font-weight: 700;
-      font-size: var(--text-body);
+      font-size: 14.5px;
+      line-height: 24.65px;
+      color: #fff;
       transition: border-radius var(--dur-med) var(--ease-luxury), box-shadow var(--dur-med) var(--ease-soft);
     }
 
@@ -1205,20 +1530,19 @@
     }
 
     .acc-group__head.groom {
-      background: #eef7fc;
-      color: var(--groom-blue);
+      background: #376a8c;
     }
 
     .acc-group__head.bride {
-      background: #fcf2ee;
-      color: var(--bride-coral);
+      background: #8e6d60;
       border-radius: 16px 16px 0 0;
-      margin-top: 16px;
+      margin-top: 0;
     }
 
     .acc-group__head img {
       width: 24px;
       height: 24px;
+      filter: brightness(0) invert(1);
       transition: transform var(--dur-slow) var(--ease-luxury);
     }
 
@@ -1230,8 +1554,8 @@
     .acc-group__head.collapsed img { transform: rotate(180deg); }
 
     .acc-group__body {
-      border: 1px solid #d7d7d7;
-      border-top: none;
+      background: #fff;
+      border: none;
       border-radius: 0 0 16px 16px;
       overflow: hidden;
       height: auto;
@@ -1247,8 +1571,12 @@
     }
 
     .acc-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       padding: 12px 16px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #d7d7d7;
+      background: #fff;
     }
 
     .acc-row:last-child { border-bottom: none; }
@@ -1260,30 +1588,41 @@
       gap: 8px;
     }
 
-    .acc-row__name {
-      font-weight: 500;
-      font-size: var(--text-body);
+    .acc-row__top > div {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
     }
 
-    .acc-row__name.groom { color: var(--groom-blue); }
-    .acc-row__name.bride { color: var(--bride-coral); }
+    .acc-row__name {
+      font-weight: 500;
+      font-size: 14.4px;
+      line-height: 21.6px;
+    }
+
+    .acc-row__name.groom { color: #24587a; }
+    .acc-row__name.bride { color: #8a4124; }
 
     .acc-row__bank {
-      font-size: var(--text-caption);
-      color: var(--brown-dark);
-      margin-top: 4px;
+      font-size: 14px;
+      line-height: 18px;
+      color: #000;
+      margin-top: 0;
     }
 
     .acc-row__copy {
       flex-shrink: 0;
+      min-width: 56px;
       padding: 7px 13px;
       border-radius: 999px;
-      border: 1px solid #d4edf8;
+      border: 1px solid #c9d7dd;
       background: #eef7fc;
-      color: #4fa3c4;
-      font-family: inherit;
-      font-size: var(--text-caption);
+      color: #326382;
+      font-size: 16px;
       font-weight: 500;
+      letter-spacing: 0.56px;
+      line-height: 16.8px;
       cursor: pointer;
       transition: transform var(--dur-fast) var(--ease-soft), opacity var(--dur-fast);
     }
@@ -1295,65 +1634,157 @@
 
     .acc-row__copy.bride {
       background: #fcf2ee;
-      border-color: #f8d4d4;
-      color: #c4614f;
+      border-color: #f8e7d4;
+      color: #8a4124;
     }
 
     .acc-row__venmo {
-      margin-top: 8px;
-      padding: 2px 8px;
-      background: #f4f0eb;
+      margin-top: 0;
+      padding: 4px 8px;
+      background: #f4f4f4;
       border-radius: 8px;
-      font-size: var(--text-caption-sm);
-      color: var(--text-muted);
+      font-size: 12px;
       line-height: 18px;
+      color: #757575;
     }
 
-    /* ── OUTRO ── */
+    .acc-row__venmo strong {
+      font-weight: 500;
+    }
+
+    /* ── OUTRO (Figma 44:359) ── */
     .outro {
-      background: var(--burgundy-deep);
-      padding: 72px 30px 60px;
-      text-align: center;
-      color: #f1f6db;
       position: relative;
+      background: #7c2820;
+      min-height: 615px;
+      padding: 60px 30px;
+      padding-bottom: calc(24px + 52px + 24px + 16px + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      color: #7c2820;
+    }
+
+    .outro__lace {
+      position: absolute;
+      left: 0;
+      top: 20.49px;
+      width: 100%;
+      height: 541px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .outro__lace-rot {
+      width: 375.644px;
+      height: 541px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .outro__lace-rot img {
+      width: 541px;
+      height: 375.644px;
+      transform: rotate(-90deg);
+      object-fit: cover;
+      flex-shrink: 0;
+      max-width: none;
+    }
+
+    .outro__center {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 315px;
+      margin-top: 107.55px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .outro__script {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding-bottom: 4px;
     }
 
     .outro__title {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-weight: 600;
-      font-size: 48px;
-      line-height: 54px;
-      color: #faf6ef;
-    }
-
-    .outro__msg {
-      font-size: var(--text-body);
-      line-height: 26px;
-      margin-top: 18px;
-      color: #f5f0e8;
-    }
-
-    .outro__photo-composite {
-      width: 207px;
-      height: auto;
-      margin: 24px auto 0;
+      width: 166.257px;
+      height: 48.892px;
       display: block;
     }
 
-    .outro__names {
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 3.24px;
-      margin-top: 20px;
-      color: #faf6ef;
+    .outro__divider {
+      position: relative;
+      width: 109px;
+      height: 11px;
+      overflow: hidden;
+      flex-shrink: 0;
     }
 
-    .outro__date {
-      font-size: var(--text-caption-sm);
-      letter-spacing: 2.64px;
-      margin-top: 8px;
-      opacity: 0.9;
+    .outro__divider img {
+      position: absolute;
+      width: 155.62%;
+      height: 1013.86%;
+      left: -27.66%;
+      top: -430.69%;
+      max-width: none;
+    }
+
+    .outro__msg {
+      font-weight: 700;
+      font-size: 15.5px;
+      line-height: 29.45px;
+      color: #7c2820;
+      text-align: center;
+      padding-top: 10px;
+      margin: 0;
+      width: 100%;
+    }
+
+    .outro__names {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding-top: 20px;
+      padding-bottom: 3px;
+      width: 100%;
+      color: #7c2820;
+      letter-spacing: 3.24px;
+      white-space: nowrap;
+    }
+
+    .outro__name {
+      font-weight: 700;
+      font-size: 15px;
+      line-height: normal;
+    }
+
+    .outro__heart {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: normal;
+      letter-spacing: 3.24px;
+    }
+
+    .outro__bottom {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: auto;
+      padding-top: 26px;
+      padding-bottom: 24px;
     }
 
     .share-kakao {
@@ -1361,13 +1792,12 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin-top: 28px;
+      margin-top: 0;
       padding: 14px 22px;
       border: none;
       border-radius: 12px;
       background: #fee500;
       color: #191919;
-      font-family: 'Noto Serif KR', serif;
       font-size: var(--text-body);
       font-weight: 600;
       cursor: pointer;
@@ -1384,22 +1814,6 @@
       width: 22px;
       height: 22px;
       flex-shrink: 0;
-    }
-
-    .outro__stripes {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 10px;
-      opacity: 0.85;
-      background: repeating-linear-gradient(
-        90deg,
-        rgb(47,34,24) 0px,
-        rgb(47,34,24) 2px,
-        transparent 2px,
-        transparent 8px
-      );
     }
 
     .rsvp-btn:disabled {
@@ -1484,7 +1898,6 @@
     }
 
     .rsvp-modal__title {
-      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-weight: 600;
       font-size: 34px;
@@ -1538,7 +1951,6 @@
       border-radius: 12px;
       background: var(--cream-bg);
       color: var(--text-muted);
-      font-family: 'Noto Serif KR', serif;
       font-size: var(--text-body);
       font-weight: 500;
       cursor: pointer;
@@ -1580,7 +1992,6 @@
       border-radius: 12px;
       background: var(--cream-bg);
       color: var(--brown-dark);
-      font-family: 'Noto Serif KR', serif;
       font-size: var(--text-body);
       padding: 13px 14px;
       transition: background var(--dur-fast), outline-color var(--dur-fast), box-shadow var(--dur-med) var(--ease-soft);
@@ -1662,7 +2073,6 @@
       border-radius: 999px;
       background: #3b2a1c;
       color: #f5f0e5;
-      font-family: 'Noto Serif KR', serif;
       font-size: var(--text-body);
       font-weight: 500;
       cursor: pointer;
@@ -1738,50 +2148,22 @@
     <a class="top-nav__link" href="#section-heart">마음</a>
   </nav>
 
-  <!-- FIGMA ARTBOARD: hero → calendar (absolute layer stack) -->
+  <!-- FIGMA ARTBOARD: Hero (리뉴얼 44:12, y=0–1052) -->
   <section class="artboard" aria-label="청첩장 메인">
-    <div class="layer layer-cream"></div>
-    <div class="layer layer-pink-grad"></div>
-
     <div class="layer layer-hero">
       <div class="crop"><img src="assets/images/hero-bg.jpg" alt="" /></div>
     </div>
 
-    <div class="layer layer-burgundy"></div>
-    <div class="layer layer-burgundy-pattern">
-      <div class="crop"><img src="assets/images/burgundy-pattern.png" alt="" /></div>
-    </div>
-
-    <div class="layer layer-grad-bottom"></div>
-    <div class="layer layer-grad-top"></div>
-
-    <div class="layer layer-lace">
-      <div class="crop"><img src="assets/images/lace-frame-fresh.png" alt="" /></div>
+    <div class="layer layer-lace-bg">
+      <div class="crop"><img src="wedding photos/lace background.png" alt="" /></div>
     </div>
 
     <div class="layer layer-clouds">
       <div class="crop"><img src="assets/images/pink-clouds-fresh.png" alt="" /></div>
     </div>
 
-    <div class="layer layer-hills">
-      <div class="crop"><img src="assets/images/landscape-hills-fresh.png" alt="" /></div>
-    </div>
-
-    <div class="layer layer-amelie-left">
-      <div class="crop"><img src="assets/images/amelie-left-fresh.png" alt="" /></div>
-    </div>
-
-    <div class="layer layer-invite-text">
-      <p>뉴욕 22번가 작은 프렌치 레스토랑에서<br />우연처럼 시작된 인연은<br />어느새 큰 사랑과 믿음이 되었습니다.</p>
-      <div class="layer-invite-text__img">
-        <img src="assets/images/amelie-center-fresh.png" alt="" />
-      </div>
-      <p>이제 저희는 같은 방향을 바라보며<br />평생을 함께 걸어가려 합니다.</p>
-      <p>저희의 새로운 시작을<br />함께 축복해 주시면 감사하겠습니다.</p>
-    </div>
-
-    <div class="layer layer-invite-right">
-      <div class="crop"><img src="assets/images/invitation-right-fresh.png" alt="" /></div>
+    <div class="layer layer-lace-card">
+      <div class="crop"><img src="assets/images/lace-frame-fresh.png" alt="" /></div>
     </div>
 
     <div class="layer layer-venue-text">
@@ -1793,25 +2175,68 @@
     <div class="layer layer-names">
       <div class="layer-names__row">
         <span>이제호</span>
-        <img src="assets/images/star.svg" alt="" />
+        <span class="layer-names__star" aria-hidden="true">✦</span>
         <span>배유정</span>
       </div>
       <p class="layer-names__date">2026 · 10 · 24 · SUN · 5:00PM</p>
     </div>
 
-    <div class="layer layer-script">
-      <div class="crop"><img src="assets/images/title-script.png" alt="Yujeong and Jeho" /></div>
+    <div class="layer layer-hero-title">
+      <p class="layer-label">THE WEDDING OF</p>
+      <div class="layer-script">
+        <div class="crop"><img src="assets/images/title-script.png" alt="Yujeong and Jeho" /></div>
+      </div>
     </div>
 
-    <p class="layer layer-label">THE WEDDING OF</p>
+    <div class="layer layer-scroll-cue" aria-hidden="true">
+      <div class="layer-scroll-cue__inner">
+        <p class="layer-scroll-cue__label">SCROLL</p>
+        <span class="layer-scroll-cue__line"></span>
+      </div>
+    </div>
+
+    <div class="layer layer-amelie-left">
+      <div class="crop"><img src="assets/images/amelie-left-fresh.png" alt="" /></div>
+    </div>
+
+    <div class="layer layer-invite-right">
+      <div class="crop"><img src="assets/images/invitation-right-fresh.png" alt="" /></div>
+    </div>
+  </section>
+
+  <!-- OUR STORY (리뉴얼 44:14, y=1052–1775) -->
+  <section class="couple-intro" id="section-start">
+    <div class="couple-intro__inner">
+      <header class="sec-heading">
+        <p class="sec-label">Our Story</p>
+        <div class="sec-title-block">
+          <p class="sec-title">우리의 시작</p>
+          <img class="sec-title__ribbon" src="assets/images/title-ribbon.png?v=3" alt="" />
+        </div>
+      </header>
+      <p class="our-story__text">뉴욕 22번가 작은 프렌치 레스토랑에서<br />우연처럼 시작된 인연은<br />어느새 큰 사랑과 믿음이 되었습니다.</p>
+      <figure class="our-story__figure">
+        <img src="assets/images/amelie-center-fresh.png" alt="" />
+      </figure>
+      <p class="our-story__text">이제 저희는 같은 방향을 바라보며<br />평생을 함께 걸어가려 합니다.</p>
+      <p class="our-story__text">저희의 새로운 시작을<br />함께 축복해 주시면 감사하겠습니다.</p>
+    </div>
+  </section>
+
+  <!-- SAVE THE DATE (리뉴얼 44:26) -->
+  <section class="artboard artboard--schedule" id="section-schedule" aria-label="일시">
+    <div class="layer layer-schedule-bg">
+      <div class="crop"><img src="assets/images/calendar-bg-fresh.png?v=2" alt="" /></div>
+    </div>
 
     <div class="layer layer-cal-save">
       <div class="save-date">
         <div class="save-date__hero">
           <p class="save-date__label">Save the date</p>
+          <img class="save-date__ribbon" src="assets/images/title-ribbon.png?v=3" alt="" />
           <p class="save-date__month">October</p>
           <p class="save-date__day">24</p>
-          <p class="save-date__meta">2026 · 10/24 (토) · 오후 5시</p>
+          <p class="save-date__meta">2026년 10월 24일 (토) · 오후 5시</p>
         </div>
         <div class="save-date__bottom">
           <div class="save-date__cal-wrap">
@@ -1821,51 +2246,79 @@
         </div>
       </div>
     </div>
-
-    <span class="scroll-anchor scroll-anchor--start" id="section-start" aria-hidden="true"></span>
-    <span class="scroll-anchor scroll-anchor--schedule" id="section-schedule" aria-hidden="true"></span>
   </section>
 
-  <!-- COUPLE INTRO -->
-  <section class="couple-intro">
-    <div class="couple-intro__bg" aria-hidden="true">
-      <div class="couple-intro__bg-base"></div>
-      <div class="couple-intro__bg-paper">
-        <img src="assets/images/couple-intro-paper.png" alt="" />
+  <!-- THE COUPLE (Figma 44:127) -->
+  <section class="the-couple" id="section-couple" aria-label="신랑 신부 소개">
+    <div class="the-couple__bg" aria-hidden="true">
+      <div class="the-couple__bg-fill"></div>
+      <div class="the-couple__bg-grid-wrap">
+        <img src="assets/images/the-couple/grid-bg.png" alt="" />
       </div>
     </div>
-    <div class="couple-intro__inner">
-      <p class="sec-title">신랑 &amp; 신부를 소개합니다</p>
-      <div class="dict-card">
-        <div class="dict-card__topbar">
-          <span class="dict-card__dot red"></span>
-          <span class="dict-card__dot yellow"></span>
-          <span class="dict-card__dot green"></span>
+
+    <div class="the-couple__inner">
+      <header class="sec-heading">
+        <p class="sec-label">The couple</p>
+        <div class="sec-title-block">
+          <p class="sec-title">신랑 &amp; 신부를 소개합니다</p>
+          <img class="sec-title__ribbon" src="assets/images/title-ribbon.png?v=3" alt="" />
         </div>
-        <div class="dict-card__photo">
-          <img src="wedding%20photos/IMG_9371.JPG" alt="이제호 &amp; 배유정" />
-        </div>
-        <div class="dict-card__body">
-          <div class="dict-card__word">
-            <span>이제호 &amp; 배유정</span>
-            <img src="assets/images/speaker.svg" alt="" />
+      </header>
+    </div>
+
+    <div class="the-couple__polaroids">
+      <img
+        class="the-couple__polaroid-composite"
+        src="wedding%20photos/Polaroid.png?v=2"
+        alt="신랑 이제호와 신부 배유정"
+      />
+    </div>
+
+    <div class="the-couple__inner">
+      <div class="the-couple__profiles">
+        <div class="the-couple__profile the-couple__profile--groom">
+          <p class="the-couple__profile-name">이제호</p>
+          <div class="the-couple__traits">
+            <p class="the-couple__trait">성격은 <span class="the-couple__hl">내향적</span></p>
+            <p class="the-couple__trait">체력은 <span class="the-couple__hl">외향적</span></p>
           </div>
-          <p class="dict-card__pos">(noun)</p>
-          <div class="dict-card__def">
-            <p>한 명은 성격은 내향적, 체력은 외향적.</p>
-            <p>한명은 성격은 외향적, 체력은 내향적.</p>
-            <p>이상하게 균형이 맞는 두 사람.</p>
-          </div>
-          <p class="dict-card__sub">파생어: 약혼 → 결혼 → 평생</p>
         </div>
+
+        <div class="the-couple__divider" aria-hidden="true">
+          <img src="assets/images/the-couple/divider.png" alt="" />
+        </div>
+
+        <div class="the-couple__profile the-couple__profile--bride">
+          <p class="the-couple__profile-name">배유정</p>
+          <div class="the-couple__traits">
+            <p class="the-couple__trait">성격은 <span class="the-couple__hl">외향적</span></p>
+            <p class="the-couple__trait">체력은 <span class="the-couple__hl">내향적</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="the-couple__bubble">
+        <div class="the-couple__bubble-img-wrap">
+          <img src="assets/images/the-couple/speech-bubble.png" alt="" />
+        </div>
+        <p class="the-couple__bubble-text">
+          서로 다른 두 사람이 만나<br />
+          조금씩 닮아가고 있습니다.
+        </p>
       </div>
     </div>
   </section>
 
   <!-- GALLERY -->
   <section class="gallery" id="section-gallery">
-    <p class="sec-label">Gallery</p>
-    <p class="sec-title">우리의 순간들</p>
+    <header class="sec-heading">
+      <p class="sec-label">Gallery</p>
+      <div class="sec-title-block">
+        <p class="sec-title">우리의 순간들</p>
+        <img class="sec-title__ribbon" src="assets/images/title-ribbon.png?v=3" alt="" />
+      </div>
+    </header>
     <div class="gallery__grid" id="galleryGrid"></div>
     <div class="gallery__extra" id="galleryExtra"></div>
     <button class="gallery__more" type="button" id="galleryMore">
@@ -1881,8 +2334,13 @@
 
   <!-- LOCATION -->
   <section class="location" id="section-location">
-    <p class="sec-label">location</p>
-    <p class="sec-title">서울대학교 호암교수회관</p>
+    <div class="location__header">
+      <div class="location__label-block">
+        <p class="sec-label">location</p>
+        <img class="location__ribbon" src="assets/images/title-ribbon.png?v=3" alt="" />
+      </div>
+      <p class="sec-title">서울대학교 호암교수회관</p>
+    </div>
     <div class="location__address">
       <img src="assets/images/pin.svg" alt="" />
       <span>서울특별시 관악구 관악로 1</span>
@@ -1925,12 +2383,23 @@
 
   <!-- ACCOUNTS -->
   <section class="accounts" id="section-heart">
-    <p class="sec-label">with heart</p>
-    <p class="sec-title">마음 전하실 곳</p>
-    <p class="accounts__intro">
-      멀리서도 축하의 마음을<br />전하고 싶으신 분들을 위해<br />계좌번호를 안내드립니다.
-    </p>
+    <div class="accounts__center">
+      <header class="accounts__header">
+        <p class="sec-label">with heart</p>
+        <div class="sec-title-block">
+          <p class="sec-title">마음 전하실 곳</p>
+          <img class="sec-title__ribbon" src="assets/images/title-ribbon.png?v=3" alt="" />
+        </div>
+      </header>
+      <p class="accounts__intro">
+        함께해 주시는 마음만으로도<br />
+        저희에게는 큰 선물입니다.<br /><br />
+        축하의 마음을 전해주실 분들을 위해<br />
+        계좌번호를 함께 남깁니다.
+      </p>
+    </div>
 
+    <div class="accounts__groups">
     <div class="acc-group">
       <div class="acc-group__head groom collapsed" data-target="groomBody">
         <span>신랑 측</span>
@@ -1941,31 +2410,30 @@
           <div class="acc-row__top">
             <div>
               <p class="acc-row__name groom">신랑 이제호</p>
-              <p class="acc-row__bank">국민은행 | 123-456-789012</p>
+              <p class="acc-row__bank">IBK기업은행 | 109-057705-02-011</p>
             </div>
-            <button class="acc-row__copy" data-copy="123-456-789012">복사</button>
+            <button class="acc-row__copy" data-copy="109-057705-02-011">복사</button>
           </div>
-          <div class="acc-row__venmo">VENMO 또는 ZELLE로 보내시려면? (🇺🇸미국)<br />Jeholllll / 9296919353</div>
+          <div class="acc-row__venmo"><strong>VENMO 또는 ZELLE로 보내시려면?</strong> (🇺🇸미국)<br />Jeholllll / 2676328463</div>
         </div>
         <div class="acc-row">
           <div class="acc-row__top">
             <div>
               <p class="acc-row__name groom">신랑 부 이황진</p>
-              <p class="acc-row__bank">국민은행 | 123-456-789012</p>
+              <p class="acc-row__bank">IBK기업은행 | 109-057705-02-011</p>
             </div>
-            <button class="acc-row__copy" data-copy="123-456-789012">복사</button>
+            <button class="acc-row__copy" data-copy="109-057705-02-011">복사</button>
           </div>
-          <div class="acc-row__venmo">VENMO 또는 ZELLE로 보내시려면? (🇺🇸미국)<br />Jeholllll / 9296919353</div>
         </div>
         <div class="acc-row">
           <div class="acc-row__top">
             <div>
               <p class="acc-row__name groom">신랑 모 이선균</p>
-              <p class="acc-row__bank">국민은행 | 123-456-789012</p>
+              <p class="acc-row__bank">IBK기업은행 | 109-057705-02-011</p>
             </div>
-            <button class="acc-row__copy" data-copy="123-456-789012">복사</button>
+            <button class="acc-row__copy" data-copy="109-057705-02-011">복사</button>
           </div>
-          <div class="acc-row__venmo">VENMO 또는 ZELLE로 보내시려면? (🇺🇸미국)<br />Jeholllll / 9296919353</div>
+          <div class="acc-row__venmo"><strong>VENMO 또는 ZELLE로 보내시려면?</strong> (🇺🇸미국)<br />Jeholllll / 9296919353</div>
         </div>
       </div>
     </div>
@@ -1980,48 +2448,72 @@
           <div class="acc-row__top">
             <div>
               <p class="acc-row__name bride">신부 배유정</p>
-              <p class="acc-row__bank">국민은행 | 123-456-789012</p>
+              <p class="acc-row__bank">국민은행 | 569-910331-33607</p>
             </div>
-            <button class="acc-row__copy bride" data-copy="123-456-789012">복사</button>
+            <button class="acc-row__copy bride" data-copy="569-910331-33607">복사</button>
           </div>
-          <div class="acc-row__venmo">VENMO 또는 ZELLE로 보내시려면? (🇺🇸미국)<br />Jeholllll / 9296919353</div>
+          <div class="acc-row__venmo"><strong>ZELLE로 보내시려면?</strong> (🇺🇸미국)<br />9296919353</div>
         </div>
         <div class="acc-row">
           <div class="acc-row__top">
             <div>
               <p class="acc-row__name bride">신부 부 배도수</p>
-              <p class="acc-row__bank">국민은행 | 123-456-789012</p>
+              <p class="acc-row__bank">국민은행 | 252-21-0052-158</p>
             </div>
-            <button class="acc-row__copy bride" data-copy="123-456-789012">복사</button>
+            <button class="acc-row__copy bride" data-copy="252-21-0052-158">복사</button>
           </div>
         </div>
         <div class="acc-row">
           <div class="acc-row__top">
             <div>
               <p class="acc-row__name bride">신부 모 김영선</p>
-              <p class="acc-row__bank">국민은행 | 123-456-789012</p>
+              <p class="acc-row__bank">우리은행 | 279-01-80-20-12-001</p>
             </div>
-            <button class="acc-row__copy bride" data-copy="123-456-789012">복사</button>
+            <button class="acc-row__copy bride" data-copy="279-01-80-20-12-001">복사</button>
           </div>
         </div>
       </div>
     </div>
+    </div>
   </section>
 
-  <!-- OUTRO -->
+  <!-- OUTRO (Figma 44:359) -->
   <footer class="outro">
-    <p class="outro__title">Thank you</p>
-    <p class="outro__msg">새로운 시작을 소중한 분들과 함께<br />시작할 수 있어 행복합니다.</p>
-    <img class="outro__photo-composite" src="assets/images/outro-photo-composite.png" alt="이제호 &amp; 배유정" />
-    <p class="outro__names">이제호 · 배유정</p>
-    <p class="outro__date">2026 · 10 · 24</p>
-    <button class="share-kakao" type="button" id="shareKakaoBtn">
-      <svg class="share-kakao__icon" viewBox="0 0 24 24" aria-hidden="true">
-        <path fill="currentColor" d="M12 3C6.477 3 2 6.477 2 10.875c0 2.793 1.857 5.245 4.656 6.645l-.984 3.563a.375.375 0 0 0 .574.414l4.125-2.719c.52.047 1.047.072 1.579.072 5.523 0 10-3.477 10-7.875S17.523 3 12 3z"/>
-      </svg>
-      카카오톡으로 공유하기
-    </button>
-    <div class="outro__stripes"></div>
+    <div class="outro__lace" aria-hidden="true">
+      <div class="outro__lace-rot">
+        <img src="assets/images/outro-lace-frame.png" alt="" />
+      </div>
+    </div>
+
+    <div class="outro__center">
+      <div class="outro__script">
+        <img class="outro__title" src="assets/images/outro-thank-you-script.svg" alt="Thank you" />
+      </div>
+      <div class="outro__divider" aria-hidden="true">
+        <img src="assets/images/outro-divider.png" alt="" />
+      </div>
+      <p class="outro__msg">
+        먼 곳에 있어 먼저 찾아뵙고<br />
+        인사드리지 못한 아쉬움이 있습니다.<br />
+        그 마음은 결혼식 날,<br />
+        웃으며 직접 전하겠습니다.<br />
+        소중한 그날, 뵙겠습니다.
+      </p>
+      <div class="outro__names">
+        <span class="outro__name">이제호</span>
+        <span class="outro__heart" aria-hidden="true">♥</span>
+        <span class="outro__name">배유정</span>
+      </div>
+    </div>
+
+    <div class="outro__bottom">
+      <button class="share-kakao" type="button" id="shareKakaoBtn">
+        <svg class="share-kakao__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M12 3C6.477 3 2 6.477 2 10.875c0 2.793 1.857 5.245 4.656 6.645l-.984 3.563a.375.375 0 0 0 .574.414l4.125-2.719c.52.047 1.047.072 1.579.072 5.523 0 10-3.477 10-7.875S17.523 3 12 3z"/>
+        </svg>
+        카카오톡으로 공유하기
+      </button>
+    </div>
   </footer>
 
   <div class="toast" id="toast"></div>
@@ -2117,9 +2609,9 @@
     // Top nav — show between hills & amelie, hide at hero top
     (function initTopNav() {
       const topNav = document.getElementById('topNav');
-      const artboard = document.querySelector('.artboard');
-      const ARTBOARD_H = 2400;
-      const SHOW_RATIO = (868 + 1042) / 2 / ARTBOARD_H;
+      const artboard = document.querySelector('.artboard:not(.artboard--schedule)');
+      const ARTBOARD_H = 1052;
+      const SHOW_RATIO = (757 + 837) / 2 / ARTBOARD_H;
 
       function getShowThreshold() {
         return artboard.offsetTop + artboard.offsetHeight * SHOW_RATIO;
@@ -2498,24 +2990,36 @@
       gsap.from('.rsvp-bar', { y: 16, opacity: 0, duration: 1.05, ease: EASE, delay: 1.1 });
 
       revealGroup({
-        trigger: '.layer-invite-text',
-        texts: ['.layer-invite-text > p'],
-        images: ['.layer-invite-text__img', '.layer-amelie-left', '.layer-invite-right']
+        trigger: '.couple-intro__inner',
+        headings: ['.couple-intro .sec-label', '.couple-intro .sec-title'],
+        texts: ['.our-story__text'],
+        images: ['.our-story__figure img', '.couple-intro .sec-title__ribbon', '.layer-amelie-left', '.layer-invite-right']
       });
 
       revealGroup({
         trigger: '.layer-cal-save',
         headings: ['.save-date__label', '.save-date__month', '.save-date__day'],
         texts: ['.save-date__meta', '.save-date__countdown'],
+        images: ['.save-date__ribbon'],
         cards: ['.save-date__cal-wrap'],
         once: true
       });
 
       revealGroup({
-        trigger: '.couple-intro__inner',
-        headings: ['.couple-intro .sec-title'],
-        images: ['.dict-card__photo'],
-        cards: ['.dict-card__topbar', '.dict-card__body']
+        trigger: '#section-couple',
+        headings: ['#section-couple .sec-label', '#section-couple .sec-title'],
+        texts: [
+          '.the-couple__profile-name',
+          '.the-couple__trait',
+          '.the-couple__bubble-text'
+        ],
+        images: [
+          '#section-couple .sec-title__ribbon',
+          '.the-couple__polaroid-composite',
+          '.the-couple__divider img',
+          '.the-couple__bubble-img-wrap img'
+        ],
+        once: true
       });
 
       revealGroup({
@@ -2549,8 +3053,8 @@
       revealGroup({
         trigger: '.outro',
         headings: ['.outro__title'],
-        texts: ['.outro__msg', '.outro__names', '.outro__date'],
-        images: ['.outro__photo-composite']
+        texts: ['.outro__msg', '.outro__names'],
+        images: ['.outro__lace img', '.outro__divider img']
       });
     })();
 
