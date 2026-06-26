@@ -2239,6 +2239,44 @@
       transform: translateX(-50%) translateY(0);
       opacity: 1;
     }
+
+    /* ── TABLET / DESKTOP (768px+): centered column ── */
+    @media (min-width: 768px) {
+      html {
+        background: #fff6f1;
+      }
+
+      body {
+        --page-max-width: 560px;
+        max-width: var(--page-max-width);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .top-nav {
+        left: 50%;
+        right: auto;
+        width: 100%;
+        max-width: var(--page-max-width);
+        transform: translate(-50%, -110%);
+      }
+
+      .top-nav.is-visible {
+        transform: translate(-50%, 0);
+      }
+
+      .rsvp-bar {
+        left: 50%;
+        right: auto;
+        width: 100%;
+        max-width: var(--page-max-width);
+        transform: translateX(-50%);
+      }
+
+      .rsvp-modal__panel {
+        max-width: var(--page-max-width);
+      }
+    }
   </style>
 </head>
 <body>
@@ -2483,7 +2521,7 @@
       <p class="sub">버스</p>
       <p>461, 641, 643, 5413, 5424, 5520, 5524, 5528 이용 낙성대하차 → GS주유소 뒷편 → [장블랑제리]제과점 앞 마을버스 [관악02-1, 관악02-2] 승차 (5분 소요) → 호암교수회관 하차 → 본관 뒷편</p>
       <h4>자가용 이용 시</h4>
-      <p>네비게이션에 "호암 교수회관" 검색<br />호암교수회관 주차장 이용 가능 (무료)</p>
+      <p>네비게이션에 "호암 교수회관" 검색<br />호암교수회관 주차장 이용 가능 (2시간 무료)</p>
       <div class="location__notice">
         <p>※ 호암교수회관은 <strong>낙성대와 서울대 후문 사이</strong>에 있습니다. 서울대 정문으로 진입하지 마시고 반드시 <strong>낙성대(서울대 후문) 방향</strong>으로 오시기 바랍니다.</p>
         <p>문의전화 : 02-880-0300</p>
