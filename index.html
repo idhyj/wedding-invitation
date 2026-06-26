@@ -1265,81 +1265,104 @@
       position: fixed;
       inset: 0;
       z-index: 10000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 48px 20px 20px;
-      background: rgba(0, 0, 0, 0);
-      backdrop-filter: blur(0);
-      -webkit-backdrop-filter: blur(0);
+      background: #0d0d0d;
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
       transition:
         opacity var(--dur-med) var(--ease-soft),
-        visibility var(--dur-med),
-        background var(--dur-med) var(--ease-soft),
-        backdrop-filter var(--dur-med) var(--ease-soft);
+        visibility var(--dur-med);
     }
 
     .lightbox.open {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
-      background: rgba(0, 0, 0, 0.78);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .lightbox__stage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
     }
 
     .lightbox__img {
+      width: 100%;
       max-width: 100%;
+      height: auto;
       max-height: 100%;
       object-fit: contain;
-      border-radius: 4px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-      touch-action: pan-y pinch-zoom;
+      touch-action: pan-x pan-y pinch-zoom;
       user-select: none;
       -webkit-user-drag: none;
-      transform: scale(0.96);
       opacity: 0;
-      transition:
-        transform var(--dur-slow) var(--ease-luxury),
-        opacity var(--dur-med) var(--ease-soft);
+      transition: opacity var(--dur-med) var(--ease-soft);
     }
 
     .lightbox.open .lightbox__img {
-      transform: scale(1);
       opacity: 1;
     }
 
     .lightbox__img.is-changing {
-      transform: scale(0.98);
-      opacity: 0.35;
-      transition-duration: 0.22s;
+      opacity: 0.2;
+      transition-duration: 0.2s;
     }
 
     .lightbox__close {
       position: absolute;
-      top: max(16px, env(safe-area-inset-top, 16px));
-      right: 16px;
-      width: 44px;
-      height: 44px;
+      top: max(10px, env(safe-area-inset-top, 10px));
+      right: max(10px, env(safe-area-inset-right, 10px));
+      z-index: 2;
+      width: 32px;
+      height: 32px;
       border: none;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.18);
-      color: #fff;
-      font-size: 28px;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 22px;
+      font-weight: 300;
       line-height: 1;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background var(--dur-fast), transform var(--dur-fast) var(--ease-soft);
+      opacity: 1;
+      transition:
+        opacity 0.28s var(--ease-soft),
+        background var(--dur-fast),
+        transform var(--dur-fast) var(--ease-soft);
     }
 
     .lightbox__close:active {
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.18);
       transform: scale(0.94);
+    }
+
+    .lightbox__counter {
+      position: absolute;
+      left: 50%;
+      bottom: max(18px, env(safe-area-inset-bottom, 18px));
+      z-index: 2;
+      transform: translateX(-50%);
+      margin: 0;
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.62);
+      opacity: 1;
+      pointer-events: none;
+      transition: opacity 0.28s var(--ease-soft);
+    }
+
+    .lightbox.is-ui-hidden .lightbox__close,
+    .lightbox.is-ui-hidden .lightbox__counter {
+      opacity: 0;
+      pointer-events: none;
     }
 
     /* ── LOCATION ── */
@@ -2364,7 +2387,10 @@
 
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button class="lightbox__close" type="button" id="lightboxClose" aria-label="닫기">&times;</button>
-    <img class="lightbox__img" id="lightboxImg" src="" alt="" />
+    <div class="lightbox__stage" id="lightboxStage">
+      <img class="lightbox__img" id="lightboxImg" src="" alt="" />
+    </div>
+    <p class="lightbox__counter" id="lightboxCounter" aria-live="polite"></p>
   </div>
 
   <!-- LOCATION -->
@@ -2841,16 +2867,34 @@
       });
 
       const lightbox = document.getElementById('lightbox');
+      const lightboxStage = document.getElementById('lightboxStage');
       const lightboxImg = document.getElementById('lightboxImg');
       const lightboxClose = document.getElementById('lightboxClose');
+      const lightboxCounter = document.getElementById('lightboxCounter');
       const galleryImages = [...document.querySelectorAll('.gallery__grid img, .gallery__extra img')];
       const gallerySources = galleryImages.map(img => img.dataset.full || img.src);
       let currentIndex = 0;
       let touchStartX = 0;
+      let touchStartY = 0;
+      let touchStartTime = 0;
+      let touchMoved = false;
+
+      function updateCounter() {
+        lightboxCounter.textContent = `${currentIndex + 1} / ${gallerySources.length}`;
+      }
+
+      function setUiVisible(visible) {
+        lightbox.classList.toggle('is-ui-hidden', !visible);
+      }
+
+      function toggleUi() {
+        setUiVisible(lightbox.classList.contains('is-ui-hidden'));
+      }
 
       function showPhoto(index) {
         if (!gallerySources.length) return;
         currentIndex = (index + gallerySources.length) % gallerySources.length;
+        updateCounter();
         if (!lightbox.classList.contains('open')) {
           lightboxImg.src = gallerySources[currentIndex];
           return;
@@ -2869,6 +2913,7 @@
 
       function openLightbox(src) {
         currentIndex = Math.max(0, gallerySources.indexOf(src));
+        setUiVisible(true);
         showPhoto(currentIndex);
         lightbox.classList.add('open');
         lightbox.setAttribute('aria-hidden', 'false');
@@ -2876,9 +2921,10 @@
       }
 
       function closeLightbox() {
-        lightbox.classList.remove('open');
+        lightbox.classList.remove('open', 'is-ui-hidden');
         lightbox.setAttribute('aria-hidden', 'true');
         lightboxImg.src = '';
+        lightboxCounter.textContent = '';
         document.body.style.overflow = '';
       }
 
@@ -2893,18 +2939,49 @@
         openLightbox(img.dataset.full || img.src);
       });
 
-      lightboxClose.addEventListener('click', closeLightbox);
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
+      lightboxClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeLightbox();
       });
+
+      lightboxStage.addEventListener('click', (e) => {
+        if (e.target !== lightboxImg) return;
+        toggleUi();
+      });
+
       lightbox.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].clientX;
+        if (e.touches.length > 1) {
+          touchMoved = true;
+          return;
+        }
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+        touchMoved = false;
       }, { passive: true });
+
+      lightbox.addEventListener('touchmove', () => {
+        touchMoved = true;
+      }, { passive: true });
+
       lightbox.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(dx) < 40) return;
-        stepPhoto(dx < 0 ? 1 : -1);
+        if (e.changedTouches.length > 1) return;
+        const touch = e.changedTouches[0];
+        const dx = touch.clientX - touchStartX;
+        const dy = touch.clientY - touchStartY;
+        const elapsed = Date.now() - touchStartTime;
+
+        if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy)) {
+          stepPhoto(dx < 0 ? 1 : -1);
+          return;
+        }
+
+        if (!touchMoved && Math.abs(dx) < 12 && Math.abs(dy) < 12 && elapsed < 320) {
+          const onPhoto = e.target === lightboxImg || e.target === lightboxStage;
+          if (onPhoto) toggleUi();
+        }
       }, { passive: true });
+
       document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('open')) return;
         if (e.key === 'Escape') closeLightbox();
