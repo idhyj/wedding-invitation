@@ -1014,21 +1014,22 @@
 
     .the-couple__polaroids {
       position: relative;
-      width: min(488.157px, 100%);
-      max-width: 100%;
-      aspect-ratio: 488.157 / 325;
+      width: 488.157px;
+      height: 325px;
+      max-width: 488.157px;
       flex-shrink: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      overflow: visible;
     }
 
     .the-couple__polaroid-composite {
-      width: 100%;
-      height: 100%;
+      width: 488.157px;
+      height: 325px;
       object-fit: contain;
       display: block;
+      max-width: none;
     }
 
     .the-couple__profiles {
