@@ -1381,30 +1381,6 @@
 
     .lightbox__tap-zone {
       display: none;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 50%;
-      z-index: 1;
-      border: none;
-      padding: 0;
-      margin: 0;
-      background: transparent;
-      cursor: default;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .lightbox__tap-zone--prev { left: 0; }
-    .lightbox__tap-zone--next { right: 0; }
-
-    @media (hover: none) and (pointer: coarse) {
-      .lightbox.open .lightbox__tap-zone {
-        display: block;
-      }
-    }
-
-    .lightbox.is-zoomed .lightbox__tap-zone {
-      display: none !important;
       pointer-events: none;
     }
 
@@ -2462,8 +2438,6 @@
 
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button class="lightbox__close" type="button" id="lightboxClose" aria-label="닫기">&times;</button>
-    <button class="lightbox__tap-zone lightbox__tap-zone--prev" type="button" id="lightboxTapPrev" aria-label="이전 사진" tabindex="-1"></button>
-    <button class="lightbox__tap-zone lightbox__tap-zone--next" type="button" id="lightboxTapNext" aria-label="다음 사진" tabindex="-1"></button>
     <div class="lightbox__stage" id="lightboxStage">
       <div class="lightbox__img-wrap" id="lightboxImgWrap">
         <img class="lightbox__img" id="lightboxImg" src="" alt="" />
@@ -2952,8 +2926,6 @@
       const lightboxImg = document.getElementById('lightboxImg');
       const lightboxClose = document.getElementById('lightboxClose');
       const lightboxCounter = document.getElementById('lightboxCounter');
-      const lightboxTapPrev = document.getElementById('lightboxTapPrev');
-      const lightboxTapNext = document.getElementById('lightboxTapNext');
       const lightboxHint = document.getElementById('lightboxHint');
       const galleryImages = [...document.querySelectorAll('.gallery__grid img, .gallery__extra img')];
       const gallerySources = galleryImages.map(img => img.dataset.full || img.src);
@@ -3019,6 +2991,11 @@
         view.ty = Math.min(maxY, Math.max(-maxY, view.ty));
       }
 
+      function isPointOnImage(clientX, clientY) {
+        const r = lightboxImg.getBoundingClientRect();
+        return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
+      }
+
       function clearUiPress() {
         if (uiPressTimer) {
           window.clearTimeout(uiPressTimer);
@@ -3026,13 +3003,22 @@
         }
       }
 
-      function tapZoneAction(delta) {
+      function tapAt(clientX, clientY) {
         if (suppressTap || isZoomed()) return;
-        if (lightbox.classList.contains('is-ui-hidden')) {
-          setUiVisible(true);
+        if (!isPointOnImage(clientX, clientY)) {
+          closeLightbox();
           return;
         }
-        stepPhoto(delta);
+        if (isCoarseTouch()) {
+          if (lightbox.classList.contains('is-ui-hidden')) {
+            setUiVisible(true);
+            return;
+          }
+          if (clientX < window.innerWidth * 0.5) stepPhoto(-1);
+          else stepPhoto(1);
+          return;
+        }
+        toggleUi();
       }
 
       function updateCounter() {
@@ -3058,7 +3044,7 @@
           window.setTimeout(() => {
             lightboxHint.hidden = true;
           }, 450);
-        }, 1000);
+        }, 1500);
       }
 
       function showPhoto(index) {
@@ -3122,23 +3108,14 @@
         closeLightbox();
       });
 
-      lightboxTapPrev.addEventListener('click', (e) => {
-        e.stopPropagation();
-        tapZoneAction(-1);
+      lightbox.addEventListener('click', (e) => {
+        if (!lightbox.classList.contains('open') || suppressTap || isCoarseTouch()) return;
+        if (lightboxClose.contains(e.target)) return;
+        if (isZoomed()) return;
+        tapAt(e.clientX, e.clientY);
       });
 
-      lightboxTapNext.addEventListener('click', (e) => {
-        e.stopPropagation();
-        tapZoneAction(1);
-      });
-
-      lightboxImg.addEventListener('click', (e) => {
-        if (isCoarseTouch() || isZoomed()) return;
-        e.stopPropagation();
-        toggleUi();
-      });
-
-      lightboxStage.addEventListener('touchstart', (e) => {
+      lightbox.addEventListener('touchstart', (e) => {
         suppressTap = false;
         if (e.touches.length === 2) {
           touchMoved = true;
@@ -3167,7 +3144,7 @@
         }
       }, { passive: true });
 
-      lightboxStage.addEventListener('touchmove', (e) => {
+      lightbox.addEventListener('touchmove', (e) => {
         clearUiPress();
         if (e.touches.length === 2) {
           touchMoved = true;
@@ -3183,8 +3160,11 @@
           applyView();
           return;
         }
-        if (e.touches.length !== 1 || !isPanning || !isZoomed()) return;
-        touchMoved = true;
+        if (e.touches.length !== 1) return;
+        const moveDx = e.touches[0].clientX - touchStartX;
+        const moveDy = e.touches[0].clientY - touchStartY;
+        if (Math.abs(moveDx) > 8 || Math.abs(moveDy) > 8) touchMoved = true;
+        if (!isPanning || !isZoomed()) return;
         const dx = e.touches[0].clientX - panStart.x;
         const dy = e.touches[0].clientY - panStart.y;
         view.tx = panOrigin.tx + dx;
@@ -3193,7 +3173,7 @@
         applyView();
       }, { passive: true });
 
-      lightboxStage.addEventListener('touchend', (e) => {
+      lightbox.addEventListener('touchend', (e) => {
         lightbox.classList.remove('is-panning');
         clearUiPress();
         if (e.touches.length > 0) return;
@@ -3222,8 +3202,8 @@
           return;
         }
 
-        if (!touchMoved && Math.abs(dx) < 12 && Math.abs(dy) < 12 && elapsed < 320 && !isCoarseTouch()) {
-          if (e.target === lightboxImg) toggleUi();
+        if (Math.abs(dx) < 12 && Math.abs(dy) < 12 && elapsed < 320) {
+          tapAt(touch.clientX, touch.clientY);
         }
       }, { passive: true });
 
