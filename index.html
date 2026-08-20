@@ -1247,8 +1247,64 @@
       transform: scale(0.985);
     }
 
-    .gallery__row--tall img { height: 250px; }
-    .gallery__row--split { height: 252px; }
+    /* Default grid — 4:3 portrait (width:height = 3:4) */
+    .gallery__grid .gallery__row--tall img {
+      aspect-ratio: 3 / 4;
+      height: auto;
+    }
+
+    .gallery__grid .gallery__row--split {
+      display: flex;
+      gap: 4px;
+      height: auto;
+      align-items: stretch;
+    }
+
+    .gallery__grid .gallery__row--split > img {
+      flex: 1 1 0;
+      min-width: 0;
+      aspect-ratio: 3 / 4;
+      height: auto;
+      width: 100%;
+    }
+
+    .gallery__grid .gallery__row--split .gallery__col {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      aspect-ratio: 3 / 4;
+    }
+
+    .gallery__grid .gallery__row--split .gallery__col img {
+      flex: 1 1 0;
+      min-height: 0;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .gallery__grid .gallery__preview--4 {
+      object-position: center 62%;
+    }
+
+    .gallery__grid .gallery__preview--5 {
+      object-position: center 78%;
+    }
+
+    .gallery__extra .gallery__preview--6 { object-position: center 58%; }
+    .gallery__extra .gallery__preview--8 { object-position: center 68%; }
+    .gallery__extra .gallery__preview--10 { object-position: center 62%; }
+    .gallery__extra .gallery__preview--11 { object-position: center 66%; }
+    .gallery__extra .gallery__preview--12 { object-position: center 74%; }
+    .gallery__extra .gallery__preview--13 { object-position: center 68%; }
+    .gallery__extra .gallery__preview--14 { object-position: 42% 45%; }
+    .gallery__extra .gallery__preview--15 { object-position: center 58%; }
+
+    /* Expanded gallery — keep existing row heights */
+    .gallery__extra .gallery__row--tall img { height: 250px; }
+
+    .gallery__extra .gallery__row--split { height: 252px; }
 
     .gallery__col {
       flex: 1;
@@ -1258,7 +1314,7 @@
       min-width: 0;
     }
 
-    .gallery__col img { flex: 1; height: 124px; }
+    .gallery__extra .gallery__col img { flex: 1; height: 124px; }
 
     .gallery__more {
       display: inline-flex;
@@ -1310,7 +1366,7 @@
     }
 
     .gallery__extra.open {
-      max-height: 820px;
+      max-height: var(--extra-open-height, 1400px);
       opacity: 1;
       pointer-events: auto;
     }
@@ -2393,7 +2449,7 @@
   <section class="artboard" aria-label="청첩장 메인">
     <div class="artboard__clip">
     <div class="layer layer-hero">
-      <div class="crop"><img src="assets/images/hero-bg.jpg" alt="" /></div>
+      <div class="crop"><img src="wedding photos/main_photo.jpg?v=2" alt="" /></div>
     </div>
 
     <div class="layer layer-lace-bg">
@@ -2830,19 +2886,21 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script>
     const PHOTOS = [
-      'wedding%20photos/JOY_3795.JPG',
-      'wedding%20photos/JOY_5079.JPG',
-      'wedding%20photos/JOY_4548.JPG',
-      'wedding%20photos/JOY_4210.JPG',
-      'wedding%20photos/JOY_5292.JPG',
-      'wedding%20photos/JOY_4477.JPG',
-      'wedding%20photos/JOY_3527.JPG',
-      'wedding%20photos/JOY_3241.JPG',
-      'wedding%20photos/JOY_4244.JPG',
-      'wedding%20photos/JOY_5389.JPG',
-      'wedding%20photos/JOY_5759.JPG',
-      'wedding%20photos/JOY_5077.JPG',
-      'wedding%20photos/FFE5AF8F-BE70-421C-BF17-5A621D4F5ADA.jpg'
+      'quality%20photo/1.jpg',
+      'quality%20photo/2.jpg',
+      'quality%20photo/3.jpg',
+      'quality%20photo/4.jpg',
+      'quality%20photo/5.jpg',
+      'quality%20photo/6.jpg',
+      'quality%20photo/7.jpg',
+      'quality%20photo/8.jpg',
+      'quality%20photo/9.jpg',
+      'quality%20photo/10.jpg',
+      'quality%20photo/11.jpg',
+      'quality%20photo/12.jpg',
+      'quality%20photo/13.jpg',
+      'quality%20photo/14.jpg',
+      'quality%20photo/15.jpg'
     ];
 
     const ADDRESS = '서울특별시 관악구 관악로 1';
@@ -3025,6 +3083,11 @@
 
     // Gallery
     (function buildGallery() {
+      function photoPreviewClass(src) {
+        const match = src.match(/(\d+)\.jpg/i);
+        return match ? `gallery__preview--${match[1]}` : '';
+      }
+
       const grid = document.getElementById('galleryGrid');
       const [a, b, c, d, e, ...rest] = PHOTOS;
 
@@ -3036,18 +3099,20 @@
         <div class="gallery__row gallery__row--split">
           <img src="${c}" alt="" loading="lazy" data-full="${c}" />
           <div class="gallery__col">
-            <img src="${d}" alt="" loading="lazy" data-full="${d}" />
-            <img src="${e}" alt="" loading="lazy" data-full="${e}" />
+            <img class="gallery__preview--4" src="${d}" alt="" loading="lazy" data-full="${d}" />
+            <img class="gallery__preview--5" src="${e}" alt="" loading="lazy" data-full="${e}" />
           </div>
         </div>`;
 
       const extra = document.getElementById('galleryExtra');
-      rest.slice(0, 6).forEach((src, i, arr) => {
+      rest.forEach((src, i, arr) => {
         if (i % 2 === 0) {
           const row = document.createElement('div');
           row.className = 'gallery__row gallery__row--tall';
           [arr[i], arr[i + 1]].filter(Boolean).forEach(s => {
             const img = document.createElement('img');
+            const previewClass = photoPreviewClass(s);
+            if (previewClass) img.className = previewClass;
             img.src = s;
             img.alt = '';
             img.loading = 'lazy';
@@ -3057,6 +3122,15 @@
           extra.appendChild(row);
         }
       });
+
+      (function syncExtraOpenHeight() {
+        extra.classList.add('open');
+        extra.style.maxHeight = 'none';
+        const height = extra.scrollHeight;
+        extra.classList.remove('open');
+        extra.style.maxHeight = '';
+        extra.style.setProperty('--extra-open-height', `${height}px`);
+      })();
 
       const moreBtn = document.getElementById('galleryMore');
       if (rest.length === 0) {
