@@ -348,16 +348,19 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
+      background-color: #fdf9ef;
     }
 
     .layer-schedule-bg .crop > img {
       position: absolute;
-      inset: 0;
-      width: 100%;
+      left: 50%;
+      bottom: 0;
+      width: 320%;
       height: 100%;
       max-width: none;
+      transform: translateX(-50%);
       object-fit: cover;
-      object-position: top center;
+      object-position: bottom center;
       display: block;
     }
 
@@ -670,7 +673,8 @@
     .save-date__month {
       font-weight: 600;
       font-size: 30px;
-      line-height: 36px;
+      line-height: normal;
+      margin: 0;
       color: #7e2a24;
     }
 
@@ -678,14 +682,16 @@
       font-weight: 500;
       font-size: 90px;
       line-height: 95.68px;
+      margin: 0;
       color: #7e2a24;
     }
 
     .save-date__meta {
       font-weight: 700;
-      font-size: 14px;
-      line-height: 17px;
+      font-size: 16px;
+      line-height: normal;
       letter-spacing: 1.5px;
+      margin: 0;
       color: #7e2a24;
     }
 
@@ -2612,7 +2618,7 @@
   <!-- SAVE THE DATE (리뉴얼 44:26) -->
   <section class="artboard artboard--schedule" id="section-schedule" aria-label="일시">
     <div class="layer layer-schedule-bg">
-      <div class="crop"><img src="assets/images/calendar-bg-fresh.png?v=2" alt="" /></div>
+      <div class="crop"><img src="assets/images/calendar-bg-fresh.png?v=3" alt="" /></div>
     </div>
 
     <div class="layer layer-cal-save">
