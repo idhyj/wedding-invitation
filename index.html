@@ -916,7 +916,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 24px;
+    }
+
+    .our-story__body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 16px;
+      width: 100%;
     }
 
     .our-story__text {
@@ -942,6 +950,67 @@
       top: -10.5%;
       left: -0.14%;
       max-width: none;
+    }
+
+    .our-story__divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .our-story__divider-line {
+      width: 64px;
+      height: 1px;
+      flex-shrink: 0;
+    }
+
+    .our-story__divider-line--left {
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(1, 0, 0, 0.036) 7.14%, rgba(6, 4, 3, 0.071) 14.29%, rgba(19, 12, 10, 0.107) 21.43%, rgba(33, 23, 21, 0.143) 28.57%, rgba(48, 35, 32, 0.179) 35.71%, rgba(64, 48, 44, 0.214) 42.86%, rgba(81, 61, 57, 0.25) 50%, rgba(98, 74, 69, 0.286) 57.14%, rgba(116, 88, 83, 0.321) 64.29%, rgba(134, 103, 96, 0.357) 71.43%, rgba(153, 118, 110, 0.393) 78.57%, rgba(172, 133, 125, 0.429) 85.71%, rgba(192, 148, 139, 0.464) 92.86%, rgba(212, 164, 154, 0.5) 100%);
+    }
+
+    .our-story__divider-line--right {
+      background: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, rgba(1, 0, 0, 0.036) 7.14%, rgba(6, 4, 3, 0.071) 14.29%, rgba(19, 12, 10, 0.107) 21.43%, rgba(33, 23, 21, 0.143) 28.57%, rgba(48, 35, 32, 0.179) 35.71%, rgba(64, 48, 44, 0.214) 42.86%, rgba(81, 61, 57, 0.25) 50%, rgba(98, 74, 69, 0.286) 57.14%, rgba(116, 88, 83, 0.321) 64.29%, rgba(134, 103, 96, 0.357) 71.43%, rgba(153, 118, 110, 0.393) 78.57%, rgba(172, 133, 125, 0.429) 85.71%, rgba(192, 148, 139, 0.464) 92.86%, rgba(212, 164, 154, 0.5) 100%);
+    }
+
+    .our-story__divider-heart {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .our-story__family {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--brown);
+      width: 100%;
+    }
+
+    .our-story__family-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+      line-height: 32px;
+      white-space: nowrap;
+    }
+
+    .our-story__parents {
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .our-story__relation {
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .our-story__given-name {
+      font-size: 16px;
+      font-weight: 600;
     }
 
     .dict-card {
@@ -1747,7 +1816,7 @@
       text-align: center;
       font-size: 14.5px;
       line-height: 24.65px;
-      color: #7a6a56;
+      color: var(--brown);
       margin: 0;
       padding-top: 11.32px;
     }
@@ -2505,19 +2574,38 @@
   <!-- OUR STORY (리뉴얼 44:14, y=1052–1775) -->
   <section class="couple-intro" id="section-start">
     <div class="couple-intro__inner">
-      <header class="sec-heading">
-        <p class="sec-label">Our Story</p>
-        <div class="sec-title-block">
-          <p class="sec-title">우리의 시작</p>
-          <img class="sec-title__ribbon" src="assets/images/title-ribbon.png?v=3" alt="" />
+      <div class="our-story__body">
+        <header class="sec-heading">
+          <p class="sec-label">Our Story</p>
+          <div class="sec-title-block">
+            <p class="sec-title">우리의 시작</p>
+            <img class="sec-title__ribbon" src="assets/images/title-ribbon.png?v=3" alt="" />
+          </div>
+        </header>
+        <p class="our-story__text">뉴욕 22번가 작은 프렌치 레스토랑에서<br />우연처럼 시작된 인연은<br />어느새 큰 사랑과 믿음이 되었습니다.</p>
+        <figure class="our-story__figure">
+          <img src="assets/images/amelie-center-fresh.png" alt="" />
+        </figure>
+        <p class="our-story__text">이제 저희는 같은 방향을 바라보며<br />평생을 함께 걸어가려 합니다.</p>
+        <p class="our-story__text">저희의 새로운 시작을<br />함께 축복해 주시면 감사하겠습니다.</p>
+      </div>
+      <div class="our-story__divider" aria-hidden="true">
+        <span class="our-story__divider-line our-story__divider-line--left"></span>
+        <img class="our-story__divider-heart" src="assets/images/our-story-heart-icon.svg" alt="" />
+        <span class="our-story__divider-line our-story__divider-line--right"></span>
+      </div>
+      <div class="our-story__family">
+        <div class="our-story__family-row">
+          <span class="our-story__parents">이황진 · 이선균</span>
+          <span class="our-story__relation">의 아들</span>
+          <span class="our-story__given-name">제호</span>
         </div>
-      </header>
-      <p class="our-story__text">뉴욕 22번가 작은 프렌치 레스토랑에서<br />우연처럼 시작된 인연은<br />어느새 큰 사랑과 믿음이 되었습니다.</p>
-      <figure class="our-story__figure">
-        <img src="assets/images/amelie-center-fresh.png" alt="" />
-      </figure>
-      <p class="our-story__text">이제 저희는 같은 방향을 바라보며<br />평생을 함께 걸어가려 합니다.</p>
-      <p class="our-story__text">저희의 새로운 시작을<br />함께 축복해 주시면 감사하겠습니다.</p>
+        <div class="our-story__family-row">
+          <span class="our-story__parents">배도수 · 김영선</span>
+          <span class="our-story__relation">의 딸</span>
+          <span class="our-story__given-name">유정</span>
+        </div>
+      </div>
     </div>
   </section>
 
