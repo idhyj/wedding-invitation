@@ -58,6 +58,14 @@
       --font-ui: 'Noto Serif KR', serif;
     }
 
+    @font-face {
+      font-family: 'Garamond Premier Pro';
+      src: url('assets/fonts/garamond-premier-pro-medium-display.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
     button,
     a,
     .acc-group__head {
@@ -131,7 +139,6 @@
     .layer-label,
     .save-date__label,
     .save-date__month,
-    .save-date__day,
     .layer-scroll-cue__label,
     .rsvp-modal__title {
       font-family: var(--font-display);
@@ -679,6 +686,7 @@
     }
 
     .save-date__day {
+      font-family: 'Garamond Premier Pro', 'Cormorant Garamond', serif;
       font-weight: 500;
       font-size: 90px;
       line-height: 95.68px;
